@@ -28,7 +28,7 @@ catalog:
   supabase: 2.78.0
   tailwind-merge: 3.5.0
   tailwindcss: 4.2.4
-  typescript: 5.9.3
+  typescript: 6.0.3
   zod: 3.25.76
 
 onlyBuiltDependencies:
