@@ -4,6 +4,19 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.3.1] - 2026-05-22
+
+### Added
+
+- Added a CircleCI package-check workflow for Generative Media Starter package validation, production dependency audit, and trusted `main` Codecov CLI upload when `CODECOV_TOKEN` is configured in CircleCI.
+- Added a Snyk Security workflow for Snyk Code SARIF upload, Open Source scanning and monitoring, high/critical dependency gating, and IaC reporting with `SNYK_TOKEN`.
+- Added repository `codecov.yml` with GitHub Actions and CircleCI provider recognition, CI-gated Codecov status, and pull request comment configuration.
+
+### Changed
+
+- Constrained GitHub Actions Codecov uploads to the explicit Vitest LCOV report to avoid irrelevant uploader search warnings.
+- Updated trusted Package Check Codecov uploads to pass `CODECOV_TOKEN` through the action environment and fail CI when coverage upload fails.
+
 ## [0.3.0] - 2026-05-22
 
 ### Changed

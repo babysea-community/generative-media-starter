@@ -43,11 +43,12 @@
 
 <strong>Checks</strong>
 
-[![Snyk](https://img.shields.io/badge/security-snyk-4203B2?style=for-the-badge&logo=snyk&logoColor=white)](https://snyk.io/test/github/babysea-community/generative-media-starter?targetFile=package.json)
-[![Codecov](https://img.shields.io/codecov/c/github/babysea-community/generative-media-starter?style=for-the-badge&logo=codecov&logoColor=white&color=FF0077&token=23Z753CC3K)](https://codecov.io/github/babysea-community/generative-media-starter)
-[![Sentry Check](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/sentry-check.yml?style=for-the-badge&label=sentry+check&logo=sentry&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/sentry-check.yml)
+[![CircleCI](https://img.shields.io/badge/circleci-passed-003740?style=for-the-badge&logo=circleci&logoColor=white)](https://dl.circleci.com/status-badge/redirect/circleci/2uTLcwc4naeNuKDP41es88/6h9hqXrixAorF2MSbqhUN9/tree/main)
+[![Codecov](https://img.shields.io/codecov/c/github/babysea-community/generative-media-starter?style=for-the-badge&label=codecov&logo=codecov&logoColor=white&color=FF0077&token=aNtHG9uJxY)](https://codecov.io/github/babysea-community/generative-media-starter)
+[![Snyk](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/snyk-security.yml?branch=main&style=for-the-badge&label=snyk&logo=snyk&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/snyk-security.yml)
+[![Sentry](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/sentry-check.yml?style=for-the-badge&label=sentry&logo=sentry&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/sentry-check.yml)
 [![CodeQL](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/codeql.yml?style=for-the-badge&label=codeql&logo=github&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/codeql.yml)
-[![Package Check](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/publish-check.yml?style=for-the-badge&label=package+check&logo=npm&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/publish-check.yml)
+[![Package](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/publish-check.yml?style=for-the-badge&label=package&logo=npm&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/publish-check.yml)
 
 <br/>
 
@@ -389,29 +390,58 @@ See [`docs/customization.md`](docs/customization.md) for safe model, credit-pack
 
 ## 8. Production readiness
 
+Generative Media Starter is a deployable starter, not a managed BabySea service. Treat this section as the production operating contract for a credit-based generative media app: every claim should map to implemented code, documented configuration, and a command or workflow you can run before release.
+
+### Enterprise posture
+
+| Area          | Control in Generative Media Starter                                                                                                  | How to verify                                                                                                     |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| Access        | Supabase Google OAuth protects dashboard routes.                                                                                     | Sign in at `/login` with a configured Google account and confirm dashboard access.                                |
+| Billing       | Stripe Checkout grants prepaid credit packs through an idempotent webhook.                                                           | Complete a Stripe test checkout and verify the ledger balance changes once.                                       |
+| Data boundary | Supabase Postgres stores credits, ledger events, generation records, and Stripe customer links behind RLS.                           | Apply migrations, run a generation, then inspect dashboard history and user-owned rows.                           |
+| Storage       | Completed media is copied into the private `generated-media` Supabase Storage bucket and displayed with signed URLs.                 | Generate media and confirm history uses signed Supabase Storage URLs instead of provider-hosted URLs.             |
+| Execution     | BabySea API keys stay server-side; generation submission reserves credits before dispatch and charges or refunds after settlement.   | Run `pnpm run doctor`, submit a generation, and verify reservation, charge, or refund ledger events.              |
+| Rate limits   | Upstash-backed production rate limits protect generation and checkout paths, with local fallback behavior for development.           | Configure Upstash in a preview environment and exercise repeated generation requests.                             |
+| Observability | Sentry is optional and disabled when no DSN is configured; source maps upload only when build secrets are present.                   | Set Sentry values in a preview environment, deploy, and run `pnpm sentry:check`.                                  |
+| Supply chain  | Package Check and companion workflows run format, lint, typecheck, coverage, build, production audit, CodeQL, Codecov, and gitleaks. | Keep GitHub Actions green and ensure `CODECOV_TOKEN` is configured for the canonical repository before promoting. |
+
+### Release gates
+
+| Gate                                          | Purpose                                                                                                             | Required before production |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------- |
+| `pnpm run doctor`                             | Validates service wiring without printing secrets.                                                                  | Yes                        |
+| `pnpm format`                                 | Verifies Prettier formatting for code, docs, and config.                                                            | Yes                        |
+| `pnpm lint`                                   | Enforces Next.js, TypeScript, and server-only import boundaries.                                                    | Yes                        |
+| `pnpm typecheck`                              | Verifies TypeScript contracts.                                                                                      | Yes                        |
+| `pnpm test:coverage`                          | Runs deterministic unit tests and emits text, lcov, and summary coverage reports for Codecov ingestion.             | Yes                        |
+| `pnpm build`                                  | Verifies production Next.js compilation.                                                                            | Yes                        |
+| `pnpm audit --prod --audit-level=high`        | Blocks high/critical production dependency advisories.                                                              | Yes                        |
+| CodeQL, Package Check, Sentry Check, gitleaks | Verifies CI security, package, monitoring, and secret-scan gates, including `coverage/lcov.info` upload to Codecov. | Yes when enabled in GitHub |
+
 ### Environment variables
 
-| Env var                           | Required   | Scope          | Notes                                |
-| :-------------------------------- | :--------- | :------------- | :----------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`            | Yes        | Browser/server | App origin for Stripe redirects.     |
-| `BABYSEA_API_KEY`                 | Yes        | Server         | Server-only BabySea key.             |
-| `BABYSEA_API_BASE_URL`            | No         | Server         | Defaults to the BabySea US API.      |
-| `STRIPE_SECRET_KEY`               | Yes        | Server         | Stripe secret key.                   |
-| `STRIPE_WEBHOOK_SECRET`           | Yes        | Server         | Stripe webhook signing secret.       |
-| `STRIPE_PRICE_STARTER`            | No         | Server         | Optional direct Starter Price ID.    |
-| `STRIPE_PRICE_BUILDER`            | No         | Server         | Optional direct Builder Price ID.    |
-| `STRIPE_PRICE_PRODUCTION`         | No         | Server         | Optional direct Production Price ID. |
-| `NEXT_PUBLIC_SUPABASE_URL`        | Yes        | Browser/server | Supabase project URL.                |
-| `NEXT_PUBLIC_SUPABASE_PUBLIC_KEY` | Yes        | Browser/server | Supabase publishable/anon key.       |
-| `SUPABASE_SECRET_KEY`             | Yes        | Server         | Supabase service role key.           |
-| `SUPABASE_PROJECT_REF`            | CLI only   | Local          | Used by Supabase CLI scripts.        |
-| `UPSTASH_REDIS_REST_URL`          | Production | Server         | Enables rate limiting.               |
-| `UPSTASH_REDIS_REST_TOKEN`        | Production | Server         | Enables rate limiting.               |
-| `NEXT_PUBLIC_SENTRY_DSN`          | No         | Browser/server | Enables runtime error tracking.      |
-| `NEXT_PUBLIC_SENTRY_ENVIRONMENT`  | No         | Browser/server | Optional Sentry environment label.   |
-| `SENTRY_ORG`                      | No         | Build/CI       | Optional source-map upload setting.  |
-| `SENTRY_PROJECT`                  | No         | Build/CI       | Optional source-map upload setting.  |
-| `SENTRY_AUTH_TOKEN`               | No         | Build/CI       | Optional source-map upload secret.   |
+| Env var                           | Required   | Scope          | Notes                                                              |
+| :-------------------------------- | :--------- | :------------- | :----------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`            | Yes        | Browser/server | App origin for Stripe redirects.                                   |
+| `BABYSEA_API_KEY`                 | Yes        | Server         | Server-only BabySea key.                                           |
+| `BABYSEA_API_BASE_URL`            | No         | Server         | Defaults to the BabySea US API.                                    |
+| `STRIPE_SECRET_KEY`               | Yes        | Server         | Stripe secret key.                                                 |
+| `STRIPE_WEBHOOK_SECRET`           | Yes        | Server         | Stripe webhook signing secret.                                     |
+| `STRIPE_PRICE_STARTER`            | No         | Server         | Optional direct Starter Price ID.                                  |
+| `STRIPE_PRICE_BUILDER`            | No         | Server         | Optional direct Builder Price ID.                                  |
+| `STRIPE_PRICE_PRODUCTION`         | No         | Server         | Optional direct Production Price ID.                               |
+| `NEXT_PUBLIC_SUPABASE_URL`        | Yes        | Browser/server | Supabase project URL.                                              |
+| `NEXT_PUBLIC_SUPABASE_PUBLIC_KEY` | Yes        | Browser/server | Supabase publishable/anon key.                                     |
+| `SUPABASE_SECRET_KEY`             | Yes        | Server         | Supabase service role key.                                         |
+| `SUPABASE_PROJECT_REF`            | CLI only   | Local          | Used by Supabase CLI scripts.                                      |
+| `UPSTASH_REDIS_REST_URL`          | Production | Server         | Enables rate limiting.                                             |
+| `UPSTASH_REDIS_REST_TOKEN`        | Production | Server         | Enables rate limiting.                                             |
+| `NEXT_PUBLIC_SENTRY_DSN`          | No         | Browser/server | Enables runtime error tracking.                                    |
+| `NEXT_PUBLIC_SENTRY_ENVIRONMENT`  | No         | Browser/server | Optional Sentry environment label.                                 |
+| `SENTRY_ORG`                      | No         | Build/CI       | Optional source-map upload setting.                                |
+| `SENTRY_PROJECT`                  | No         | Build/CI       | Optional source-map upload setting.                                |
+| `SENTRY_AUTH_TOKEN`               | No         | Build/CI       | Optional source-map upload secret.                                 |
+| `CODECOV_TOKEN`                   | No         | CI             | Optional Codecov upload secret for Package Check coverage reports. |
 
 ### Checklist
 
@@ -426,6 +456,7 @@ See [`docs/customization.md`](docs/customization.md) for safe model, credit-pack
 - [ ] Upstash rate limiting is enabled for production.
 - [ ] `pnpm run doctor` passes before deployment.
 - [ ] `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm test:coverage`, and `pnpm build` pass.
+- [ ] `CODECOV_TOKEN` is configured in the canonical GitHub repository when Codecov uploads are required.
 - [ ] Optional Sentry values are set only when runtime monitoring and source maps are desired.
 - [ ] A full test purchase and generation succeeds in production.
 

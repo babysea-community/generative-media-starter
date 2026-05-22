@@ -1,0 +1,114 @@
+version: 2.1
+
+jobs:
+  starter-package:
+    docker:
+      - image: cimg/node:24.11
+    working_directory: ~/project
+    environment:
+      NEXT_PUBLIC_SITE_URL: http://localhost:3011
+      BABYSEA_API_KEY: bye_ci
+      STRIPE_SECRET_KEY: sk_test_ci
+      STRIPE_WEBHOOK_SECRET: whsec_ci
+      NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321
+      NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci
+      SUPABASE_SECRET_KEY: ci
+      UPSTASH_REDIS_REST_URL: https://ci.example.com
+      UPSTASH_REDIS_REST_TOKEN: ci
+      NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - generative-media-starter-pnpm-v1-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Set up pnpm
+          command: |
+            npm install --global pnpm@10.19.0
+            pnpm config set store-dir ~/.pnpm-store
+      - run:
+          name: Install dependencies
+          command: pnpm install --frozen-lockfile
+      - save_cache:
+          key: generative-media-starter-pnpm-v1-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.pnpm-store
+      - run:
+          name: Format check
+          command: pnpm format
+      - run:
+          name: Lint
+          command: pnpm lint
+      - run:
+          name: Typecheck
+          command: pnpm typecheck
+      - run:
+          name: Test coverage
+          command: pnpm test:coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage/lcov.info
+      - run:
+          name: Build
+          command: pnpm build
+
+  dependency-audit:
+    docker:
+      - image: cimg/node:24.11
+    working_directory: ~/project
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - generative-media-starter-pnpm-v1-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Set up pnpm
+          command: |
+            npm install --global pnpm@10.19.0
+            pnpm config set store-dir ~/.pnpm-store
+      - run:
+          name: Install dependencies
+          command: pnpm install --frozen-lockfile
+      - save_cache:
+          key: generative-media-starter-pnpm-v1-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.pnpm-store
+      - run:
+          name: pnpm audit production high+
+          command: pnpm audit --prod --audit-level=high
+
+  codecov-upload:
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Upload coverage to Codecov
+          command: |
+            if [ -z "${CODECOV_TOKEN:-}" ]; then
+              echo "CODECOV_TOKEN is not configured in CircleCI; skipping trusted main coverage upload."
+              exit 0
+            fi
+            curl -fsSLO https://cli.codecov.io/latest/linux/codecov
+            chmod +x codecov
+            ./codecov --auto-load-params-from CircleCI upload-process \
+              -Z \
+              -t "$CODECOV_TOKEN" \
+              -C "$CIRCLE_SHA1" \
+              -f coverage/lcov.info \
+              --disable-search
+
+workflows:
+  package-check:
+    jobs:
+      - starter-package
+      - dependency-audit
+      - codecov-upload:
+          requires:
+            - starter-package
+          filters:
+            branches:
+              only: main
