@@ -1,0 +1,72 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - preview
+          - production
+
+concurrency:
+  group: deploy-${{ github.event.inputs.environment || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-vercel:
+    name: Vercel (${{ github.event.inputs.environment || 'production' }})
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+    permissions:
+      contents: read
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::warning::VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID not configured for this environment; skipping deploy."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
+        id: check
+      - uses: actions/checkout@v6
+        if: steps.check.outputs.deploy == 'true'
+      - uses: pnpm/action-setup@v6
+        if: steps.check.outputs.deploy == 'true'
+        with:
+          version: 10.19.0
+      - uses: actions/setup-node@v6
+        if: steps.check.outputs.deploy == 'true'
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install Vercel CLI
+        if: steps.check.outputs.deploy == 'true'
+        run: pnpm add -g vercel@latest
+      - name: Pull Vercel environment
+        if: steps.check.outputs.deploy == 'true'
+        run: |
+          vercel pull --yes \
+            --environment=${{ github.event.inputs.environment == 'preview' && 'preview' || 'production' }} \
+            --token "$VERCEL_TOKEN"
+      - name: Build
+        if: steps.check.outputs.deploy == 'true'
+        run: |
+          vercel build ${{ github.event.inputs.environment == 'preview' && '' || '--prod' }} \
+            --token "$VERCEL_TOKEN"
+      - name: Deploy
+        if: steps.check.outputs.deploy == 'true'
+        run: |
+          vercel deploy --prebuilt ${{ github.event.inputs.environment == 'preview' && '' || '--prod' }} \
+            --token "$VERCEL_TOKEN"

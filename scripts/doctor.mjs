@@ -24,6 +24,22 @@ const BABYSEA_API_HOSTS = new Set([
   'api.jp.babysea.ai',
 ]);
 const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1', '::1']);
+const GENERATIVE_REPOSITORY_URL =
+  'https://github.com/babysea-community/generative-media-starter';
+const GENERATIVE_VERCEL_DEPLOY_URL =
+  'https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,BABYSEA_API_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN';
+const GENERATIVE_NETLIFY_DEPLOY_URL = `https://app.netlify.com/start/deploy?repository=${GENERATIVE_REPOSITORY_URL}`;
+const GENERATIVE_NETLIFY_TEMPLATE_ENV = [
+  'NEXT_PUBLIC_SITE_URL',
+  'BABYSEA_API_KEY',
+  'STRIPE_SECRET_KEY',
+  'STRIPE_WEBHOOK_SECRET',
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'NEXT_PUBLIC_SUPABASE_PUBLIC_KEY',
+  'SUPABASE_SECRET_KEY',
+  'UPSTASH_REDIS_REST_URL',
+  'UPSTASH_REDIS_REST_TOKEN',
+];
 const results = [];
 const ORIGINAL_ENV_KEYS = new Set(Object.keys(process.env));
 
@@ -336,6 +352,37 @@ await runCheck('Netlify deployment config', () => {
   }
 
   return 'Netlify build command, publish directory, and Node version verified';
+});
+
+await runCheck('Deploy buttons', () => {
+  const readme = readRequiredFile('README.md');
+  const netlify = readRequiredFile('netlify.toml');
+  const expectedVercelButton = `[![Deploy with Vercel](https://vercel.com/button)](${GENERATIVE_VERCEL_DEPLOY_URL})`;
+  const expectedNetlifyButton = `[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](${GENERATIVE_NETLIFY_DEPLOY_URL})`;
+
+  if (!readme.includes(expectedVercelButton)) {
+    throw new Error(
+      'README Vercel deploy button must clone babysea-community/generative-media-starter',
+    );
+  }
+
+  if (!readme.includes(expectedNetlifyButton)) {
+    throw new Error(
+      'README Netlify deploy button must clone babysea-community/generative-media-starter',
+    );
+  }
+
+  if (!netlify.includes('[template.environment]')) {
+    throw new Error('netlify.toml must include template environment prompts');
+  }
+
+  for (const name of GENERATIVE_NETLIFY_TEMPLATE_ENV) {
+    if (!netlify.includes(`${name} =`)) {
+      throw new Error(`netlify.toml template environment must include ${name}`);
+    }
+  }
+
+  return 'Vercel and Netlify deploy buttons target the public starter repo';
 });
 
 await runCheck('Security headers (next.config.ts)', () => {

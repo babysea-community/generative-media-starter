@@ -4,6 +4,13 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.3.3] - 2026-05-23
+
+### Added
+
+- Added the Vercel Deploy workflow so Generative Media Starter exposes the same preview/production deployment check as Sherin when Vercel environment secrets are configured.
+- Added doctor validation for the README Vercel and Netlify deploy buttons and Netlify template environment prompts.
+
 ## [0.3.2] - 2026-05-23
 
 ### Fixed
