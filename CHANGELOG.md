@@ -4,6 +4,12 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.3.4] - 2026-05-23
+
+### Changed
+
+- Expanded Dependabot version updates to check npm dependencies daily and GitHub Actions weekly.
+
 ## [0.3.3] - 2026-05-23
 
 ### Added
