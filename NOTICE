@@ -1,0 +1,17 @@
+# generative-media-starter NOTICE
+
+Copyright 2026 BabySea, Inc.
+
+This product includes software developed at BabySea, Inc. (https://babysea.ai).
+
+It builds on the following open-source projects:
+
+- Next.js (MIT License) - https://nextjs.org
+- React (MIT License) - https://react.dev
+- Supabase JS / SSR (MIT License) - https://github.com/supabase/supabase-js
+- Stripe Node SDK (MIT License) - https://github.com/stripe/stripe-node
+- Upstash Redis / Ratelimit (MIT License) - https://github.com/upstash
+- Tailwind CSS (MIT License) - https://tailwindcss.com
+- Zod (MIT License) - https://github.com/colinhacks/zod
+- lucide-react (ISC License) - https://github.com/lucide-icons/lucide
+- BabySea TypeScript SDK (Apache 2.0 License) - https://github.com/babysea-community/babysea

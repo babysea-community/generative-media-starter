@@ -1,0 +1,36 @@
+project_id = "generative-media-starter"
+
+[api]
+port = 54331
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54332
+major_version = 17
+
+[studio]
+port = 54333
+
+[inbucket]
+port = 54334
+smtp_port = 54335
+pop3_port = 54336
+
+[storage]
+file_size_limit = "50MiB"
+
+[auth]
+site_url = "http://localhost:3011"
+additional_redirect_urls = ["http://localhost:3011/auth/callback"]
+jwt_expiry = 3600
+enable_signup = true
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = false
+enable_confirmations = false
+
+[analytics]
+enabled = false

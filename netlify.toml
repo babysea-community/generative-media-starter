@@ -1,0 +1,28 @@
+# Netlify build configuration for generative-media-starter.
+# The official @netlify/plugin-nextjs runtime is auto-installed for Next.js
+# projects on Netlify and handles SSR, route handlers, and the Next.js
+# proxy/middleware on Netlify Functions. No edge-runtime conversion is
+# required, so the Supabase auth-refresh proxy works unmodified.
+
+[build]
+  command = "pnpm build"
+  publish = ".next"
+
+[build.environment]
+  # Match package.json `engines.node`.
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--version"
+
+[template.environment]
+  NEXT_PUBLIC_SITE_URL = "Required. Your deployed app URL, for example https://generative-media.example.com or https://your-site.netlify.app."
+  BABYSEA_API_KEY = "Required. Your server-only BabySea API key. Keep it secret."
+  STRIPE_SECRET_KEY = "Required. Your Stripe secret key for Checkout session creation."
+  STRIPE_WEBHOOK_SECRET = "Required. Your Stripe webhook signing secret for /api/stripe/webhook."
+  NEXT_PUBLIC_SUPABASE_URL = "Required. Your Supabase project URL."
+  NEXT_PUBLIC_SUPABASE_PUBLIC_KEY = "Required. Your Supabase publishable or anon key."
+  SUPABASE_SECRET_KEY = "Required. Your Supabase service role key. Keep it server-only."
+  UPSTASH_REDIS_REST_URL = "Required for production generation rate limiting."
+  UPSTASH_REDIS_REST_TOKEN = "Required for production generation rate limiting. Keep it secret."
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

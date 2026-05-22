@@ -1,0 +1,9 @@
+{
+  "fields": {
+    "generation_prompt": "Text description of the content you want to generate",
+    "generation_ratio": "Aspect ratio of the generated content",
+    "generation_output_format": "Format of the output file",
+    "generation_output_number": "Number of outputs to generate",
+    "generation_provider_order": "Execution policy for provider ordering."
+  }
+}

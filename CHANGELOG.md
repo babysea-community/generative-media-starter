@@ -1,0 +1,155 @@
+# Changelog
+
+All notable changes will be documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+## [0.3.0] - 2026-05-22
+
+### Changed
+
+- Standardized contributing and code-of-conduct guidance with the shared BabySea OSS documentation standard.
+- Moved Generative Media Starter repository metadata, docs links, deploy links, and source links from the `babysea-ai` organization to `babysea-community`.
+- Upgraded Package Check, Sentry Check, and CodeQL workflow actions to Node 24-compatible majors, including `actions/checkout@v6`, `actions/setup-node@v6`, `pnpm/action-setup@v6`, `github/codeql-action@v4`, and `codecov/codecov-action@v6`.
+
+### Fixed
+
+- Declared `@next/eslint-plugin-next` as a direct standalone dev dependency and catalog entry so clean installs can resolve the flat ESLint config import during `pnpm lint`.
+- Made the optional Sentry Project Check skip cleanly when Sentry CI secrets are absent and warn instead of failing hosted starter workflows when the configured token cannot read Sentry project or ownership endpoints.
+- Replaced `gitleaks/gitleaks-action@v2` with a pinned, checksum-verified `gitleaks` CLI install and redacted full-history `gitleaks detect` run, avoiding the paid organization license requirement while keeping secret scanning enabled.
+
+## [0.2.9] - 2026-05-22
+
+### Added
+
+- Added Sentry as optional `@sentry/nextjs` runtime initialization, browser/server instrumentation, no-DSN no-op behavior, source-map upload wrapper, Sentry config tests, and server-side generation error capture.
+- Added Vitest coverage output and Package Check Codecov upload using `coverage/lcov.info`.
+- Added Sherin-style package validation guardrails: lint, coverage, production dependency audit, and gitleaks secret scan.
+
+## [0.2.8] - 2026-05-21
+
+### Changed
+
+- Update badge icon.
+
+## [0.2.7] - 2026-05-20
+
+### Changed
+
+- Updated the BabySea SDK catalog dependency to `babysea@1.4.5`.
+
+## [0.2.6] - 2026-05-20
+
+### Added
+
+- Added icon packs for button and hero, and provide link for buttons.
+
+## [0.2.5] - 2026-05-20
+
+- Updated icon and scripts deploy for auto topics and description.
+
+## [0.2.4] - 2026-05-20
+
+- Updated icon.
+
+## [0.2.3] - 2026-05-19
+
+### Changed
+
+- Added a local `pnpm-workspace.yaml` catalog and switched package dependency specifiers to `catalog:` so standalone installs match the Sherin starter pattern.
+- Updated Vercel and Netlify deployment configuration to use the starter's actual BabySea, Stripe, Supabase, and Upstash environment variables instead of Sherin-specific variables.
+- Aligned deployment docs, doctor checks, and GitHub package validation with the local pnpm workspace install flow.
+
+### Fixed
+
+- Excluded generated Supabase types from Prettier formatting.
+- Corrected the customization guide path for generation server-action validation.
+
+## [0.2.2] - 2026-05-17
+
+### Security
+
+- Hardened `scripts/sentry-project-check.mjs` with normalized config parsing, HTTPS-only Sentry URL validation except localhost, bounded retry handling, strict Sentry API response-shape checks, stronger secret redaction, and stackless failure output. No runtime Sentry SDK, DSN, or telemetry is added.
+
+### Changed
+
+- Bumped the starter package from `0.2.1` to `0.2.2`.
+
+## [0.2.1] - 2026-05-16
+
+### Changed
+
+- Updated the BabySea SDK dependency to `babysea@1.4.4`, including the SDK's hardened API error parsing for malformed or non-standard error envelopes.
+
+## [0.2.0] - 2026-05-11
+
+### Added
+
+- Extended `pnpm run doctor` with two new checks: a static check that `next.config.ts` declares the baseline security headers and an `async headers()` block, and a live probe that fetches `NEXT_PUBLIC_SITE_URL` and verifies the deployed origin actually serves `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Strict-Transport-Security`. The live probe warns (does not fail) when the site URL is localhost or the origin is unreachable so local doctor runs stay green.
+
+### Security
+
+- Added baseline browser security headers in `next.config.ts` (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` opt-out for camera/microphone/geolocation/browsing-topics, `Strict-Transport-Security` with two-year max-age + preload, and `X-DNS-Prefetch-Control`) so Vercel/Netlify deployments ship with the same hardening defaults as Vercel OSS reference apps.
+- Disabled Next.js `logging.fetches.fullUrl` in production builds so Stripe, Supabase, BabySea, and signed Supabase Storage URLs (which carry tokens in query strings) no longer leak into hosted server logs. Full URLs remain enabled in development for local debugging.
+- Extended the `lib/env.ts` hosted-runtime guard beyond Vercel to also cover `NETLIFY` and `NODE_ENV === 'production'`, preventing `localhost` URLs from passing `NEXT_PUBLIC_SITE_URL` / `NEXT_PUBLIC_SUPABASE_URL` validation on Netlify or any other hosted target.
+- Pinned the Stripe SDK `apiVersion` to `2026-02-25.clover` in `lib/stripe.ts` so webhook payload shapes and Checkout responses stay deterministic across Stripe account API-version upgrades; documented the version-bump pairing rule in source.
+- Hardened the login page banner: `/login?error=...` and `/login?message=...` now render copy from a fixed allowlist (`oauth_unavailable`, `oauth_failed`, `callback_invalid`, `signed_out`) instead of forwarding raw provider error strings, removing a low-severity phishing/UI-spoofing vector via crafted URLs.
+
+## [0.1.0] - 2026-05-08
+
+### Added
+
+- Update favicon.
+- `netlify.toml` and a Netlify "Deploy" one-click button in the README, alongside the existing Vercel button. Netlify uses the official `@netlify/plugin-nextjs` runtime, which supports the Supabase auth-refresh proxy (Node.js Middleware) on Netlify Functions without any source changes.
+- Dedicated `docs/deploy-netlify.md` guide covering Netlify build settings, environment variables, domain updates, external service callbacks, production verification, runtime notes, and troubleshooting.
+- Standalone `CodeQL` and `Package Check` GitHub Actions workflows for the public starter repository, plus README workflow badges.
+- Sentry code-guard README badge and security-policy guidance for the public `babysea-community/generative-media-starter` repository; no Sentry SDK, DSN, tracing, error-reporting client, or runtime telemetry is bundled.
+- Added `scripts/sentry-project-check.mjs`, a `sentry:check` package script, a README badge, ignored local `.sentryclirc` support, and a scheduled `Sentry Project Check` workflow. The workflow reads Sentry org/project configuration from GitHub Actions secrets, verifies the configured project slug, active status, `other` platform, ownership, and Code Guard rules, and does not add runtime tracking.
+- Google-only Supabase OAuth login with a dedicated `/auth/callback` route for server-side code exchange.
+- Inline Google OAuth icon in the login button.
+- Next.js 16 (App Router) reference application with landing, login, and dashboard (Generate + Billing) routes.
+- Supabase Google OAuth authentication with auth-refresh middleware.
+- Four PostgreSQL migrations: starter schema (`credit_balances`, `credit_ledger`, `generations`, `stripe_customers`, `processed_stripe_events`), BabySea API key column, generation-output preservation, and `generated-media` bucket hardening.
+- Atomic credit RPCs for grant, reserve, charge, and refund flows with RLS for user-owned reads.
+- Idempotent Stripe webhook handler for `checkout.session.completed` and `checkout.session.async_payment_succeeded`.
+- One-time prepaid credit packs resolved by Stripe lookup key with optional `STRIPE_PRICE_*` overrides.
+- BabySea TypeScript SDK integration: schema loading and cost estimation before reservation, generation behind a server-only `BABYSEA_API_KEY`.
+- Private `generated-media` Supabase Storage bucket with signed URL delivery in generation history.
+- Upstash Redis production rate limiting with local-dev fallback.
+- Vercel deployment config (`vercel.json`) with standalone-clone install, build, and dev commands.
+- Preflight `pnpm run doctor` validating env, BabySea schema, Stripe Prices, Supabase tables/storage, Upstash REST, and Vercel command alignment without printing secret values.
+- Apache 2.0 license, NOTICE, SECURITY policy, CONTRIBUTING guide, CODE_OF_CONDUCT, and Dependabot configuration.
+- Documentation: `docs/supabase.md`, `docs/stripe.md`, `docs/deploy-vercel.md`, `docs/customization.md`.
+
+### Changed
+
+- Reorder the badge.
+- README status badge and status copy now describe the project as a working OSS starter rather than a reference-only starter.
+- README anchors now keep the OSS Starters badge focused on the starter itself, and the broad OSS taxonomy / primitive cross-promotion block was replaced with starter-specific related resources.
+- Deployment, Supabase, and agent-guide wording now describes OSS starters as working deployable apps and clarifies that publish validation runs before push rather than through mandatory GitHub status checks.
+- OG social image URL switched from `public` folder to `https://cdn.babysea.live/assets/oss/generative-media-starter-card.png` for reliable social-crawler resolution.
+- Landing page "Sign in" button now shows only a `LogIn` icon on mobile (`< sm`) and the full "Sign in" label on `sm+`, consistent with the dashboard sign-out button.
+- OG social image now served from the `public` folder (`/generative-media-starter.png`) instead of a raw GitHub URL.
+- Stats row ("Balance" and "Execution policy") is now a two-column grid on all screen sizes so both pills sit side by side on mobile.
+- Sign-out button shows only a `LogOut` icon on mobile (`< sm`) and the full "Sign out" label on `sm+`.
+- Nav links (Generate, Billing) highlight the active tab with a teal background and border so users can see which page they are on.
+- Removed email/password, magic-link, and OTP auth paths from the starter surface. The local Supabase config disables email signup and docs now point to exact Google OAuth callback URLs.
+- Disabled generation submission in the UI when the user has insufficient credits, preventing form submission before any generation server action runs.
+- Disabled Stripe checkout buttons when Stripe secrets are missing, with a demo-safe banner above the credit-ledger message area.
+
+### Security
+
+- Hardened the OAuth callback `next` parameter to allow only same-origin dashboard paths and avoid open redirects.
+
+### Notes
+
+- Cloudflare Workers (`@opennextjs/cloudflare`) was evaluated and intentionally **not** added. The OpenNext Cloudflare adapter does not yet support Next.js Node.js Middleware, which the Supabase auth-refresh `proxy.ts` requires. A Cloudflare deploy target will be revisited once OpenNext supports Node.js Middleware or Supabase ships an edge-runtime SSR proxy helper.
+
+### Validated
+
+- `pnpm install --ignore-workspace` from a standalone clone.
+- `pnpm run doctor`, `pnpm typecheck`, `pnpm format`, and `pnpm build` all green against the reference deployment.
+- BabySea SDK: `bfl/flux-schnell` schema loaded with $0.005/output cost estimate.
+- Stripe: three one-time USD Prices verified by lookup key and direct ID override.
+- Supabase: migrations applied, service role reachable, private `generated-media` bucket present.
+- Upstash: REST ping succeeded.
