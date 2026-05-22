@@ -1,6 +1,6 @@
 {
   "name": "generative-media-starter",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Credit-based generative media app. Built with Next.js, Stripe, Supabase, Upstash, and the BabySea SDK.",
   "private": true,
   "license": "Apache-2.0",
@@ -87,6 +87,12 @@
     "typescript": "catalog:",
     "typescript-eslint": "8.59.3",
     "vitest": "4.0.7"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.10",
+      "ws": "8.20.1"
+    }
   },
   "packageManager": "pnpm@10.19.0"
 }
