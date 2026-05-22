@@ -80,7 +80,7 @@
     "babel-plugin-react-compiler": "catalog:",
     "eslint": "catalog:",
     "eslint-config-next": "catalog:",
-    "globals": "16.4.0",
+    "globals": "17.6.0",
     "prettier": "catalog:",
     "supabase": "catalog:",
     "tailwindcss": "catalog:",
