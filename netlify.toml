@@ -1,17 +1,6 @@
-# Netlify build configuration for generative-media-starter.
-# The official @netlify/plugin-nextjs runtime is auto-installed for Next.js
-# projects on Netlify and handles SSR, route handlers, and the Next.js
-# proxy/middleware on Netlify Functions. No edge-runtime conversion is
-# required, so the Supabase auth-refresh proxy works unmodified.
-
 [build]
   command = "pnpm build"
   publish = ".next"
-
-[build.environment]
-  # Match package.json `engines.node`.
-  NODE_VERSION = "20"
-  NPM_FLAGS = "--version"
 
 [template.environment]
   NEXT_PUBLIC_SITE_URL = "Required. Your deployed app URL, for example https://generative-media.example.com or https://your-site.netlify.app."

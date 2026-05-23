@@ -75,11 +75,30 @@ await runCheck('Standalone pnpm configuration', () => {
     }
   }
 
+  const pinnedDevDependencies = {
+    '@vitest/coverage-v8': '4.0.7',
+    globals: '16.4.0',
+    'typescript-eslint': '8.59.3',
+    vitest: '4.0.7',
+  };
+
   for (const [sectionName, section] of Object.entries({
     dependencies: packageJson.dependencies ?? {},
     devDependencies: packageJson.devDependencies ?? {},
   })) {
     for (const [name, specifier] of Object.entries(section)) {
+      const expectedPinnedVersion = pinnedDevDependencies[name];
+
+      if (sectionName === 'devDependencies' && expectedPinnedVersion) {
+        if (specifier !== expectedPinnedVersion) {
+          throw new Error(
+            `${sectionName}.${name} must be pinned to ${expectedPinnedVersion}`,
+          );
+        }
+
+        continue;
+      }
+
       if (specifier !== 'catalog:') {
         throw new Error(`${sectionName}.${name} must use catalog:`);
       }
@@ -299,21 +318,19 @@ await runCheck('Vercel deployment config', () => {
     throw new Error('vercel.json framework must be nextjs');
   }
 
-  if (vercel.buildCommand !== 'pnpm build') {
-    throw new Error('vercel.json buildCommand must be pnpm build');
+  if (!Array.isArray(vercel.regions) || !vercel.regions.includes('iad1')) {
+    throw new Error('vercel.json must pin the iad1 region');
   }
 
-  if (vercel.devCommand !== 'pnpm dev') {
-    throw new Error('vercel.json devCommand must be pnpm dev');
+  for (const command of ['buildCommand', 'devCommand', 'installCommand']) {
+    if (command in vercel) {
+      throw new Error(
+        `vercel.json should rely on Vercel defaults for ${command}`,
+      );
+    }
   }
 
-  if (vercel.installCommand !== 'pnpm install --frozen-lockfile') {
-    throw new Error(
-      'vercel.json installCommand must be pnpm install --frozen-lockfile',
-    );
-  }
-
-  return 'Vercel build, install, and dev commands verified';
+  return 'Vercel Next.js framework and iad1 region verified';
 });
 
 await runCheck('Netlify deployment config', () => {
@@ -331,8 +348,13 @@ await runCheck('Netlify deployment config', () => {
     throw new Error('netlify.toml publish directory must be .next');
   }
 
-  if (!netlify.includes('NODE_VERSION = "20"')) {
-    throw new Error('netlify.toml must pin NODE_VERSION = "20"');
+  if (
+    netlify.includes('[build.environment]') ||
+    netlify.includes('NODE_VERSION')
+  ) {
+    throw new Error(
+      'netlify.toml should rely on package.json engines for Node version selection',
+    );
   }
 
   for (const name of [
@@ -351,7 +373,7 @@ await runCheck('Netlify deployment config', () => {
     }
   }
 
-  return 'Netlify build command, publish directory, and Node version verified';
+  return 'Netlify build command, publish directory, and template environment verified';
 });
 
 await runCheck('Deploy buttons', () => {

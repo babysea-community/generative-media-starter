@@ -7,13 +7,12 @@ URL that works with Supabase Auth, Stripe Checkout, and BabySea generation.
 
 Use the button in the main README, or create a project manually in Vercel.
 
-| Vercel setting      | Value                            |
-| ------------------- | -------------------------------- |
-| Framework Preset    | Next.js                          |
-| Root Directory      | Empty for a standalone repo      |
-| Install Command     | `pnpm install --frozen-lockfile` |
-| Build Command       | `pnpm build`                     |
-| Development Command | `pnpm dev`                       |
+| Vercel setting   | Value                                                 |
+| ---------------- | ----------------------------------------------------- |
+| Framework Preset | Next.js                                               |
+| Root Directory   | Empty for a standalone repo                           |
+| Commands         | Vercel defaults from package scripts                  |
+| Region           | `iad1`, configured in [`vercel.json`](../vercel.json) |
 
 If you vendor this starter inside a monorepo, set Root Directory to the folder
 that contains this README. The checked-in `pnpm-workspace.yaml` keeps catalog

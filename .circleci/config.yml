@@ -6,10 +6,10 @@ jobs:
       - image: cimg/node:24.11
     working_directory: ~/project
     environment:
-      NEXT_PUBLIC_SITE_URL: http://localhost:3011
-      BABYSEA_API_KEY: bye_ci
-      STRIPE_SECRET_KEY: sk_test_ci
-      STRIPE_WEBHOOK_SECRET: whsec_ci
+      NEXT_PUBLIC_SITE_URL: https://generative-media-starter.example.com
+      BABYSEA_API_KEY: ci
+      STRIPE_SECRET_KEY: ci
+      STRIPE_WEBHOOK_SECRET: ci
       NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321
       NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci
       SUPABASE_SECRET_KEY: ci

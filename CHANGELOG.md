@@ -4,6 +4,19 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.3.6] - 2026-05-23
+
+### Changed
+
+- Aligned the standalone pnpm catalog with Sherin's Tailwind CSS, Tailwind PostCSS, and tailwind-merge versions.
+- Simplified Vercel and Netlify deployment config to the Sherin-style framework/plugin defaults while keeping app-specific environment prompts.
+
+### Fixed
+
+- Removed the redundant `ws` override and updated doctor deployment checks to match the shared starter config approach.
+
+## [0.3.5] - 2026-05-23
+
 ### Fixed
 
 - Replaced Sentry URL trailing-slash regex normalization with a bounded string scan to avoid CodeQL ReDoS noise.

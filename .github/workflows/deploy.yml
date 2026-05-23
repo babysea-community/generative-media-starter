@@ -63,10 +63,10 @@ jobs:
       - name: Build
         if: steps.check.outputs.deploy == 'true'
         run: |
-          vercel build ${{ github.event.inputs.environment == 'preview' && '' || '--prod' }} \
+          vercel build ${{ (github.event_name == 'push' || github.event.inputs.environment == 'production') && '--prod' || '' }} \
             --token "$VERCEL_TOKEN"
       - name: Deploy
         if: steps.check.outputs.deploy == 'true'
         run: |
-          vercel deploy --prebuilt ${{ github.event.inputs.environment == 'preview' && '' || '--prod' }} \
+          vercel deploy --prebuilt ${{ (github.event_name == 'push' || github.event.inputs.environment == 'production') && '--prod' || '' }} \
             --token "$VERCEL_TOKEN"

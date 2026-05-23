@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 
 const title = 'Generative Media Starter';
 const description =
-  'Credit-based generative media app. Built with Next.js, Stripe, Supabase, Upstash, and the BabySea SDK.';
+  'Credit-based generative media app starter. Built for founders and developers who want auth, prepaid credits, private storage, and BabySea SDK-backed generation.';
 const socialImageUrl =
   'https://cdn.babysea.live/assets/oss/generative-media-starter-card.png';
 

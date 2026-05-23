@@ -9,14 +9,16 @@
 </h1>
 
 <p>
-  Credit-based generative media app. Built with Next.js, Stripe, Supabase, Upstash, and the BabySea SDK.
+  Credit-based generative media app starter. Built for founders and developers who want auth, prepaid credits, private storage, and BabySea SDK-backed generation.
 </p>
 
 <p>
-  <strong>A working app boundary for auth, prepaid credits, private media storage, and BabySea SDK-backed generation.</strong>
+  <strong>Ship with auth, credits, storage, and generation.</strong>
 </p>
 
 <br />
+
+<strong>Quick links</strong>
 
 [![BabySea Demo](https://custom-icon-badges.demolab.com/badge/babysea-see_demo-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://demo.generative-media-starter.babysea.live)
 [![BabySea Blog](https://custom-icon-badges.demolab.com/badge/babysea-deep_dive-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://babysea.ai/blog/how-babysea-built-atomic-credit-settlement-on-stripe-and-postgres)
@@ -24,16 +26,7 @@
 
 <br />
 
-<img src="public/card.png" alt="Generative Media Starter card" />
-
-<br />
-
-<img src="public/dashboard.png" alt="Generative Media Starter dashboard" />
-
-<br/>
-<br/>
-
-<strong>Project</strong>
+<strong>Project details</strong>
 
 [![BabySea OSS Starter](https://custom-icon-badges.demolab.com/badge/oss-starter-2563EB?style=for-the-badge&logo=babysea&logoColor=white)](#babysea-oss-taxonomy)
 [![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/oss_status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
@@ -67,6 +60,7 @@
 [![Stripe](https://img.shields.io/badge/stripe-533AFD?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com)
 [![Supabase](https://img.shields.io/badge/supabase-249361?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 [![Upstash](https://img.shields.io/badge/upstash-00E9A3?style=for-the-badge&logo=upstash&logoColor=white)](https://upstash.com)
+[![Sentry](https://img.shields.io/badge/sentry-181225?style=for-the-badge&logo=sentry&logoColor=white)](https://sentry.io)
 [![Netlify](https://img.shields.io/badge/netlify-05BDBA?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com)
 [![Vercel](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
@@ -74,12 +68,20 @@
 
 <strong>One-click deploy</strong>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,BABYSEA_API_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,BABYSEA_API_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+
+<br />
+
+<img src="public/card.png" alt="Generative Media Starter card" />
+
+<br />
+
+<img src="public/dashboard.png" alt="Generative Media Starter dashboard" />
 
 </div>
 
----
+<br/>
 
 ## BabySea OSS taxonomy
 

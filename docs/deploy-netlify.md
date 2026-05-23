@@ -11,13 +11,13 @@ GitHub repository.
 
 The checked-in `netlify.toml` is the source of truth for the build:
 
-| Netlify setting   | Value                       |
-| ----------------- | --------------------------- |
-| Framework         | Next.js                     |
-| Base directory    | Empty for a standalone repo |
-| Build command     | `pnpm build`                |
-| Publish directory | `.next`                     |
-| Node version      | `20`                        |
+| Netlify setting   | Value                                     |
+| ----------------- | ----------------------------------------- |
+| Framework         | Next.js                                   |
+| Base directory    | Empty for a standalone repo               |
+| Build command     | `pnpm build`                              |
+| Publish directory | `.next`                                   |
+| Node version      | From package.json `engines.node` (`24.x`) |
 
 If you vendor this starter inside a monorepo, set the Base directory to the
 folder that contains this README. The checked-in `pnpm-workspace.yaml` keeps
