@@ -2,7 +2,7 @@ import 'server-only';
 
 import Stripe from 'stripe';
 
-import { requireEnv } from './env';
+import { requireEnv } from '../utils/env';
 
 // Pin the Stripe API version so webhook payload shapes and Checkout responses
 // stay deterministic across Stripe account upgrades. Bump this in lockstep with

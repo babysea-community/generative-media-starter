@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: 'Purchase credits and view your usage history.',
   robots: { index: false, follow: false },
 };
-import { getOptionalEnv } from '@/lib/env';
-import { getUser } from '@/lib/supabase/server';
+import { getOptionalEnv } from '@/lib/utils/env';
+import { getUser } from '@/lib/database/server';
 import { formatCredits, formatDate } from '@/lib/utils';
 
 import { CopyableGenerationId } from '../_components/copy-controls';

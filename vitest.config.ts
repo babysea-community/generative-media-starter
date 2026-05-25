@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 
-// Minimal Vitest config for the Generative Media Starter.
+// Minimal Vitest config for the starter.
 //
 // Tests cover the pure, server-only helpers that are easy to break and hard
 // to debug in production. Component / integration tests belong in the

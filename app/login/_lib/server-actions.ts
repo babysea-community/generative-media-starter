@@ -2,8 +2,8 @@
 
 import { redirect } from 'next/navigation';
 
-import { getSiteUrl } from '@/lib/env';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { getSiteUrl } from '@/lib/utils/env';
+import { createSupabaseServerClient } from '@/lib/database/server';
 
 export async function signInWithGoogle() {
   const supabase = await createSupabaseServerClient();

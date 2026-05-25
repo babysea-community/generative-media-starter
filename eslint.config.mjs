@@ -12,29 +12,29 @@ import globals from 'globals';
 
 const SERVER_ONLY_PATTERNS = [
   {
-    group: ['@/lib/supabase/admin', '@/lib/supabase/admin.*'],
+    group: ['@/lib/database/admin', '@/lib/database/admin.*'],
     message:
-      'lib/supabase/admin is server-only. Import from @/lib/supabase/server or use a server action.',
+      'lib/database/admin is server-only. Import from @/lib/database/server or use a server action.',
     allowTypeImports: true,
   },
   {
-    group: ['@/lib/babysea', '@/lib/babysea.*'],
+    group: ['@/lib/inference/babysea', '@/lib/inference/babysea.*'],
     message:
       'BabySea SDK calls must stay server-only. Call them from a server action or route handler. Type-only imports are allowed.',
     allowTypeImports: true,
   },
   {
-    group: ['@/lib/storage', '@/lib/storage.*'],
+    group: ['@/lib/storage', '@/lib/storage/*'],
     message:
-      'Storage helpers are server-only. Call them from a server action or route handler. Type-only imports are allowed.',
+      'Storage adapters are server-only. Call them from a server action or route handler. Type-only imports are allowed.',
     allowTypeImports: true,
   },
   {
     group: [
       '@/lib/monitoring/sentry-server',
-      '@/lib/rate-limit',
-      '@/lib/stripe',
-      '@/lib/stripe-prices',
+      '@/lib/security/rate-limit',
+      '@/lib/billing/stripe',
+      '@/lib/billing/prices',
     ],
     message: 'This module is server-only. Type-only imports are allowed.',
     allowTypeImports: true,

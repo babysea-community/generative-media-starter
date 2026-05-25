@@ -36,13 +36,15 @@
 
 <strong>Assistants & bots</strong>
 
-![OpenAI](https://custom-icon-badges.demolab.com/badge/openai-000000?style=for-the-badge&logo=openai&logoColor=white)
+![Claude](https://img.shields.io/badge/claude-D97757?style=for-the-badge&logo=claude&logoColor=white)
+![OpenAI](https://custom-icon-badges.demolab.com/badge/gpt-000000?style=for-the-badge&logo=openai&logoColor=white)
 ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
 
 <br/>
 
 <strong>Checks</strong>
 
+[![GitLabCI](https://img.shields.io/gitlab/pipeline-status/babysea/generative-media-starter?branch=main&style=for-the-badge&label=gitlabci&logo=gitlab&logoColor=white&color=FC6D26)](https://gitlab.com/babysea/generative-media-starter/-/commits/main)
 [![CircleCI](https://img.shields.io/badge/circleci-passed-003740?style=for-the-badge&logo=circleci&logoColor=white)](https://dl.circleci.com/status-badge/redirect/circleci/2uTLcwc4naeNuKDP41es88/6h9hqXrixAorF2MSbqhUN9/tree/main)
 [![Codecov](https://img.shields.io/codecov/c/github/babysea-community/generative-media-starter?style=for-the-badge&label=codecov&logo=codecov&logoColor=white&color=FF0077&token=aNtHG9uJxY)](https://codecov.io/github/babysea-community/generative-media-starter)
 [![Snyk](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/snyk-security.yml?branch=main&style=for-the-badge&label=snyk&logo=snyk&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/snyk-security.yml)
@@ -69,7 +71,7 @@
 <strong>One-click deploy</strong>
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,BABYSEA_API_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 <br />
 

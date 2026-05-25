@@ -15,15 +15,15 @@ import {
   isBabySeaConfigured,
   runBabySeaGeneration,
   type BabySeaGenerationStarted,
-} from '@/lib/babysea';
+} from '@/lib/inference/babysea';
 import {
   assertGenerationRateLimit,
   isGenerationRateLimitError,
-} from '@/lib/rate-limit';
+} from '@/lib/security/rate-limit';
 import { captureServerError } from '@/lib/monitoring/sentry-server';
 import { persistRemoteAsset } from '@/lib/storage';
-import { createSupabaseAdminClient } from '@/lib/supabase/admin';
-import { getUser } from '@/lib/supabase/server';
+import { createSupabaseAdminClient } from '@/lib/database/admin';
+import { getUser } from '@/lib/database/server';
 import { errorMessage } from '@/lib/utils';
 
 const GenerateSchema = z.object({

@@ -8,8 +8,8 @@ import type {
   Model,
 } from 'babysea';
 
-import { BABYSEA_API_BASE_URL, BABYSEA_MODEL } from './app-config';
-import { getOptionalEnv, requireEnv } from './env';
+import { BABYSEA_API_BASE_URL, BABYSEA_MODEL } from '../app-config';
+import { getOptionalEnv, requireEnv } from '../utils/env';
 
 export type BabySeaGenerationRequest = {
   prompt: string;

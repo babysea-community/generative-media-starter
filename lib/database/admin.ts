@@ -2,7 +2,7 @@ import 'server-only';
 
 import { createClient } from '@supabase/supabase-js';
 
-import { getSupabaseUrl, requireEnv } from '@/lib/env';
+import { getSupabaseUrl, requireEnv } from '@/lib/utils/env';
 import type { Database } from '@/lib/database.types';
 
 export function createSupabaseAdminClient() {

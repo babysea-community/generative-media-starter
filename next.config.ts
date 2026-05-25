@@ -3,27 +3,14 @@ import { createRequire } from 'node:module';
 import { dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { API_SECURITY_HEADERS, SECURITY_HEADERS } from './lib/security/csp';
+
 const appRoot = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const nextPackageRoot = dirname(require.resolve('next/package.json'));
 const turbopackRoot = findCommonDirectory(appRoot, nextPackageRoot);
 
 const isProduction = process.env.NODE_ENV === 'production';
-
-const SECURITY_HEADERS = [
-  { key: 'X-Frame-Options', value: 'DENY' },
-  { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  {
-    key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
-  },
-  { key: 'X-DNS-Prefetch-Control', value: 'on' },
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
-];
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -47,6 +34,10 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: SECURITY_HEADERS,
+      },
+      {
+        source: '/api/:path*',
+        headers: API_SECURITY_HEADERS,
       },
     ];
   },

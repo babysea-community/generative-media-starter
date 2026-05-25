@@ -13,10 +13,13 @@ import {
   BABYSEA_PROVIDER_ORDER_DEFAULT,
   GENERATION_COST_CREDITS,
 } from '@/lib/app-config';
-import { getBabySeaModelConfig, isBabySeaConfigured } from '@/lib/babysea';
-import generationDescriptions from '@/lib/generation-descriptions.json';
+import {
+  getBabySeaModelConfig,
+  isBabySeaConfigured,
+} from '@/lib/inference/babysea';
+import generationDescriptions from '@/lib/generation/descriptions.json';
 import { createSignedAssetUrl } from '@/lib/storage';
-import { getUser } from '@/lib/supabase/server';
+import { getUser } from '@/lib/database/server';
 import { formatCredits, formatDate } from '@/lib/utils';
 
 import {

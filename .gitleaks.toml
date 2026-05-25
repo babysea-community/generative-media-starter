@@ -1,0 +1,12 @@
+title = "Generative Media Starter gitleaks config"
+
+[allowlist]
+description = "Allow generative-media-starter documentation and CI placeholder examples."
+regexTarget = "match"
+regexes = [
+  '''BABYSEA_API_KEY=\nBABYSEA_API_BASE_URL=''',
+  '''BABYSEA_API_KEY=<babysea_api_key>''',
+  '''STRIPE_SECRET_KEY=sk_test_ci''',
+  '''STRIPE_WEBHOOK_SECRET=whsec_ci''',
+  '''Authorization: Bearer (BABYSEA_API_KEY|bye_live_\.\.\.)''',
+]

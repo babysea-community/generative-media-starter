@@ -3,8 +3,8 @@ import 'server-only';
 import type Stripe from 'stripe';
 
 import type { CreditPack } from '@/lib/app-config';
-import { getOptionalEnv } from '@/lib/env';
-import { createStripeClient } from '@/lib/stripe';
+import { getOptionalEnv } from '@/lib/utils/env';
+import { createStripeClient } from '@/lib/billing/stripe';
 
 export async function resolveStripePriceId(
   stripe: ReturnType<typeof createStripeClient>,

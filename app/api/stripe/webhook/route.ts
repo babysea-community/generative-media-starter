@@ -5,10 +5,10 @@ import Stripe from 'stripe';
 import { z } from 'zod';
 
 import { getCreditPack } from '@/lib/app-config';
-import { requireEnv } from '@/lib/env';
-import { createStripeClient } from '@/lib/stripe';
-import { resolveStripePriceId } from '@/lib/stripe-prices';
-import { createSupabaseAdminClient } from '@/lib/supabase/admin';
+import { requireEnv } from '@/lib/utils/env';
+import { createStripeClient } from '@/lib/billing/stripe';
+import { resolveStripePriceId } from '@/lib/billing/prices';
+import { createSupabaseAdminClient } from '@/lib/database/admin';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

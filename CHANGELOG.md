@@ -2,7 +2,18 @@
 
 All notable changes will be documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [0.3.8] - 2026-05-25
+
+### Changed
+
+- Reorganized `lib/` to match the Sherin starter layout: `babysea.ts` moved to `lib/inference/babysea.ts`; `stripe.ts` and `stripe-prices.ts` moved under `lib/billing/` (as `stripe.ts` and `prices.ts`); `storage.ts` moved to `lib/storage/index.ts`; `rate-limit.ts` moved to `lib/security/rate-limit.ts`; `env.ts` moved to `lib/utils/env.ts`; `utils.ts` moved to `lib/utils/index.ts`; `generation-descriptions.json` moved to `lib/generation/descriptions.json`. All `@/lib/*` import paths updated; no runtime behavior changes.
+
+### Added
+
+- Added `Content-Security-Policy` via `lib/security/csp.ts`, applied through `next.config.ts`. Connect, image, script, and frame directives are scoped to BabySea API regions, the BabySea CDN, Supabase (HTTP + WS), Stripe (api, js, m, hooks, checkout), and any configured `BABYSEA_API_BASE_URL` and `NEXT_PUBLIC_SENTRY_DSN` hosts; `frame-ancestors` is `'none'` and `object-src` is `'none'`. JSON API routes also receive `Cache-Control: no-store` via `API_SECURITY_HEADERS`.
+- Added a `.gitleaks.toml` with project-specific allowlist entries so the Gitleaks workflow ignores documentation and CI placeholder examples (mirrors BabyChain).
+- Added a Vercel deploy preflight that fails the workflow if `NEXT_PUBLIC_SITE_URL`, `BABYSEA_API_KEY`, `BABYSEA_API_BASE_URL`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, Supabase keys, or Upstash credentials are missing—and validates BabySea API host, HTTPS, and Stripe key prefixes—so misconfiguration is caught before deploy instead of at runtime (mirrors BabyChain's deploy preflight).
+- Quoted `VERCEL_ENVIRONMENT` in `deploy.yml` via a dedicated env var rather than inline interpolation, matching BabyChain's hardened deploy pattern.
 
 ## [0.3.7] - 2026-05-24
 

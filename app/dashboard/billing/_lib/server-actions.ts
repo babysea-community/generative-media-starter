@@ -4,11 +4,11 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 import { getCreditPack } from '@/lib/app-config';
-import { getOptionalEnv, getSiteUrl } from '@/lib/env';
-import { createStripeClient } from '@/lib/stripe';
-import { resolveStripePriceId } from '@/lib/stripe-prices';
-import { createSupabaseAdminClient } from '@/lib/supabase/admin';
-import { getUser } from '@/lib/supabase/server';
+import { getOptionalEnv, getSiteUrl } from '@/lib/utils/env';
+import { createStripeClient } from '@/lib/billing/stripe';
+import { resolveStripePriceId } from '@/lib/billing/prices';
+import { createSupabaseAdminClient } from '@/lib/database/admin';
+import { getUser } from '@/lib/database/server';
 
 export async function createCheckoutSession(formData: FormData) {
   const { user } = await getUser();

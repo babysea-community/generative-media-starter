@@ -5,7 +5,7 @@ import { NavLinks } from './_components/nav-links';
 import { signOut } from './_lib/server-actions';
 
 import { BABYSEA_PROVIDER_ORDER_DEFAULT } from '@/lib/app-config';
-import { getUser } from '@/lib/supabase/server';
+import { getUser } from '@/lib/database/server';
 import { formatCredits } from '@/lib/utils';
 
 export default async function DashboardLayout({

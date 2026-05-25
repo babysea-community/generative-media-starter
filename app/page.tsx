@@ -3,8 +3,11 @@ import { redirect } from 'next/navigation';
 import { CircleCheckBig, LogIn } from 'lucide-react';
 
 import { GENERATION_COST_CREDITS } from '@/lib/app-config';
-import { getBabySeaModelConfig, isBabySeaConfigured } from '@/lib/babysea';
-import { getUser } from '@/lib/supabase/server';
+import {
+  getBabySeaModelConfig,
+  isBabySeaConfigured,
+} from '@/lib/inference/babysea';
+import { getUser } from '@/lib/database/server';
 import { formatCredits } from '@/lib/utils';
 
 export default async function HomePage() {

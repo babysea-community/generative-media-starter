@@ -3,7 +3,7 @@ import 'server-only';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-import { getOptionalEnv } from './env';
+import { getOptionalEnv } from '../utils/env';
 
 let limiter: Ratelimit | null = null;
 
