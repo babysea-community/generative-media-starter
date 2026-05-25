@@ -13,7 +13,7 @@
 </p>
 
 <p>
-  <strong>Ship with auth, credits, storage, and generation.</strong>
+  <strong>Ship with auth, credits, storage, and generation</strong>
 </p>
 
 <br />
