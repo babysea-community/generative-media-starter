@@ -46,6 +46,7 @@ const ORIGINAL_ENV_KEYS = new Set(Object.keys(process.env));
 loadEnvFile('.env');
 loadEnvFile('.env.local', { override: true });
 
+const SKIP_LIVE_CHECKS = process.env.BABYSEA_DOCTOR_SKIP_LIVE_CHECKS === 'true';
 const starterConfig = readStarterConfig();
 
 console.log('Generative Media Starter doctor\n');
@@ -155,6 +156,10 @@ await runCheck('Runtime environment variables', () => {
 });
 
 await runCheck('BabySea SDK model schema', async () => {
+  if (SKIP_LIVE_CHECKS) {
+    return skipLiveCheck('live BabySea API schema check skipped');
+  }
+
   const apiKey = requiredEnv('BABYSEA_API_KEY');
   const baseUrl = validateUrlEnv('BABYSEA_API_BASE_URL', {
     optional: true,
@@ -198,6 +203,10 @@ await runCheck('BabySea SDK model schema', async () => {
 });
 
 await runCheck('Stripe credit-pack prices', async () => {
+  if (SKIP_LIVE_CHECKS) {
+    return skipLiveCheck('live Stripe price check skipped');
+  }
+
   const stripe = new Stripe(requiredEnv('STRIPE_SECRET_KEY'));
 
   for (const pack of starterConfig.creditPacks) {
@@ -213,6 +222,10 @@ await runCheck('Stripe credit-pack prices', async () => {
 });
 
 await runCheck('Supabase schema and storage', async () => {
+  if (SKIP_LIVE_CHECKS) {
+    return skipLiveCheck('live Supabase schema and storage check skipped');
+  }
+
   const supabase = createClient(
     requiredEnv('NEXT_PUBLIC_SUPABASE_URL'),
     requiredEnv('SUPABASE_SECRET_KEY'),
@@ -290,6 +303,10 @@ await runCheck('Supabase schema and storage', async () => {
 });
 
 await runCheck('Upstash Redis rate-limit store', async () => {
+  if (SKIP_LIVE_CHECKS) {
+    return skipLiveCheck('live Upstash Redis ping skipped');
+  }
+
   const url = env('UPSTASH_REDIS_REST_URL');
   const token = env('UPSTASH_REDIS_REST_TOKEN');
 
@@ -432,6 +449,10 @@ await runCheck('Security headers (next.config.ts)', () => {
 });
 
 await runCheck('Security headers (deployed origin)', async () => {
+  if (SKIP_LIVE_CHECKS) {
+    return skipLiveCheck('live deployed-origin header probe skipped');
+  }
+
   const siteUrl = env('NEXT_PUBLIC_SITE_URL');
 
   if (!siteUrl) {
@@ -555,6 +576,10 @@ async function runCheck(title, check) {
 
 function warn(message) {
   return { status: 'warn', message };
+}
+
+function skipLiveCheck(message) {
+  return warn(`${message} by BABYSEA_DOCTOR_SKIP_LIVE_CHECKS`);
 }
 
 function record(status, title, details) {

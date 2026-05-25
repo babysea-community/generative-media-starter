@@ -1,0 +1,164 @@
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: DAST.gitlab-ci.yml
+
+stages:
+  - verify
+  - test
+  - build
+  - security
+  - dast
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+
+variables:
+  GIT_DEPTH: '0'
+  GITLAB_ADVANCED_SAST_ENABLED: 'true'
+  SAST_EXCLUDED_PATHS: '.next,.pnpm-store,coverage,node_modules,public'
+  DS_EXCLUDED_PATHS: '.next,.pnpm-store,coverage,node_modules,public'
+  SECRET_DETECTION_EXCLUDED_PATHS: '.next,.pnpm-store,coverage,node_modules,public'
+  SECRET_DETECTION_HISTORIC_SCAN: 'true'
+  DAST_WEBSITE: https://demo.generative-media-starter.babysea.live
+  DAST_BROWSER_SCAN: 'true'
+  NEXT_PUBLIC_SITE_URL: https://generative-media-starter.example.com
+  BABYSEA_API_KEY: bye_ci
+  STRIPE_SECRET_KEY: sk_test_ci
+  STRIPE_WEBHOOK_SECRET: whsec_ci
+  NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+  NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci
+  SUPABASE_SECRET_KEY: ci
+  UPSTASH_REDIS_REST_URL: https://example.upstash.io
+  UPSTASH_REDIS_REST_TOKEN: ci
+  NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci
+  BABYSEA_DOCTOR_SKIP_LIVE_CHECKS: 'true'
+  PNPM_INSTALL_FLAGS: --frozen-lockfile --ignore-scripts
+
+default:
+  interruptible: true
+  retry:
+    max: 1
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+.pnpm-job:
+  image: node:24-bookworm
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+      prefix: pnpm-${CI_COMMIT_REF_SLUG}
+    paths:
+      - .pnpm-store/
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@10.19.0 --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install $PNPM_INSTALL_FLAGS
+
+verify:doctor:
+  stage: verify
+  extends: .pnpm-job
+  timeout: 10m
+  script:
+    - pnpm doctor
+
+verify:format:
+  stage: verify
+  extends: .pnpm-job
+  timeout: 10m
+  script:
+    - pnpm format
+
+verify:lint:
+  stage: verify
+  extends: .pnpm-job
+  timeout: 10m
+  script:
+    - pnpm lint
+
+verify:typecheck:
+  stage: verify
+  extends: .pnpm-job
+  timeout: 10m
+  script:
+    - pnpm typecheck
+
+test:coverage:
+  stage: test
+  extends: .pnpm-job
+  timeout: 15m
+  coverage: '/All files[^|]*\|[^|]*\s+([0-9.]+)/'
+  script:
+    - pnpm test:coverage
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - coverage/
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+
+coverage:upload:
+  stage: security
+  image: alpine:3.22
+  needs:
+    - job: test:coverage
+      artifacts: true
+  timeout: 5m
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_TAG'
+  before_script:
+    - apk add --no-cache ca-certificates curl
+  script:
+    - if [ -z "${CODECOV_TOKEN:-}" ]; then echo 'CODECOV_TOKEN is not configured; skipping GitLab Codecov upload.'; exit 0; fi
+    - if [ -z "${CODECOV_UPLOADER_SHA256:-}" ]; then echo 'CODECOV_UPLOADER_SHA256 is not configured; skipping GitLab Codecov upload.'; exit 0; fi
+    - curl --fail --location --retry 3 --retry-delay 2 --output codecov "${CODECOV_UPLOADER_URL:-https://uploader.codecov.io/latest/linux/codecov}"
+    - printf '%s  codecov\n' "$CODECOV_UPLOADER_SHA256" | sha256sum -c -
+    - chmod +x codecov
+    - ./codecov -Z -t "$CODECOV_TOKEN" -f coverage/lcov.info -F gitlab -n "$CI_JOB_NAME" -C "$CI_COMMIT_SHA"
+
+build:next:
+  stage: build
+  extends: .pnpm-job
+  timeout: 15m
+  script:
+    - pnpm build
+
+dependency:audit:
+  stage: security
+  extends: .pnpm-job
+  timeout: 10m
+  needs: []
+  script:
+    - pnpm audit --prod --audit-level=high
+
+secret:scan:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:v8.28.0
+    entrypoint: ['']
+  timeout: 5m
+  needs: []
+  script:
+    - gitleaks detect --source . --no-banner --redact
+
+dast:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
+      allow_failure: true
+    - when: never

@@ -1,7 +1,7 @@
 {
   "name": "generative-media-starter",
-  "version": "0.3.6",
-  "description": "Credit-based generative media app starter. Built for founders and developers who want auth, prepaid credits, private storage, and BabySea SDK-backed generation.",
+  "version": "0.3.7",
+  "description": "Credit-based generative media app starter with auth, prepaid credits, and private storage.",
   "private": true,
   "license": "Apache-2.0",
   "homepage": "https://demo.generative-media-starter.babysea.live",
@@ -12,22 +12,20 @@
   "keywords": [
     "babysea",
     "open-source",
-    "starter-pack",
-    "stripe",
-    "supabase",
-    "upstash",
-    "vercel",
     "ai-infrastructure",
     "control-plane",
     "execution-layer",
-    "developer-tools",
-    "generative-ai",
     "inference-providers",
-    "image-generation",
-    "video-generation",
-    "multimodal",
+    "developer-tools",
+    "creative-tools",
+    "generative-ai",
     "generative-media",
-    "creative-tools"
+    "stripe",
+    "supabase",
+    "upstash",
+    "sentry",
+    "netlify",
+    "vercel"
   ],
   "engines": {
     "node": "24.x"

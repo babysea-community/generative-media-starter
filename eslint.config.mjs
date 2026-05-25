@@ -45,6 +45,7 @@ export default [
   {
     ignores: [
       '.next/**',
+      '.pnpm-store/**',
       'coverage/**',
       'node_modules/**',
       'next-env.d.ts',

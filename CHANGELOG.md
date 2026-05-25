@@ -4,6 +4,13 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.3.7] - 2026-05-24
+
+### Added
+
+- Added a GitLab CI pipeline that mirrors BabyChain's verification, coverage, build, dependency audit, secret scanning, Code Quality, SAST, Dependency Scanning, and scheduled/manual DAST checks.
+- Added Cobertura coverage output and a CI-safe doctor mode so GitLab can validate the starter with placeholder environment values.
+
 ## [0.3.6] - 2026-05-23
 
 ### Changed

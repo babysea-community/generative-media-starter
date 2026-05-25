@@ -1,7 +1,7 @@
 <div align="center">
 
 <p>
-  <img src="public/icon.png" width="100" alt="Generative Media Starter icon" />
+  <img src="public/icon.png" width="140" alt="Generative Media Starter icon" />
 </p>
 
 <h1>
@@ -9,7 +9,7 @@
 </h1>
 
 <p>
-  Credit-based generative media app starter. Built for founders and developers who want auth, prepaid credits, private storage, and BabySea SDK-backed generation.
+  Credit-based generative media app starter with auth, prepaid credits, and private storage.
 </p>
 
 <p>
@@ -34,10 +34,10 @@
 
 <br/>
 
-<strong>Assistants & Bots</strong>
+<strong>Assistants & bots</strong>
 
-![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
 ![OpenAI](https://custom-icon-badges.demolab.com/badge/openai-000000?style=for-the-badge&logo=openai&logoColor=white)
+![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
 
 <br/>
 
@@ -213,23 +213,23 @@ No provider credentials, queues, cron jobs, user-managed inference-provider keys
 
 ```text
 User
-  | sign in and buy credits
-  v
+  │ sign in and buy credits
+  ▼
 Next.js App -> Stripe Checkout
-  | verified webhook
-  v
+  │ verified webhook
+  ▼
 Supabase Postgres grant_credits(...)
-  | user submits generation
-  v
+  │ user submits generation
+  ▼
 BabySea SDK schema + cost estimate
-  | reserve credits
-  v
+  │ reserve credits
+  ▼
 BabySea generation
-  | completed asset URL
-  v
+  │ completed asset URL
+  ▼
 Supabase Storage private copy
-  | terminal settlement
-  v
+  │ terminal settlement
+  ▼
 charge on success or refund on failure
 ```
 

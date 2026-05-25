@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 
 const title = 'Generative Media Starter';
 const description =
-  'Credit-based generative media app starter. Built for founders and developers who want auth, prepaid credits, private storage, and BabySea SDK-backed generation.';
+  'Credit-based generative media app starter with auth, prepaid credits, and private storage.';
 const socialImageUrl =
   'https://cdn.babysea.live/assets/oss/generative-media-starter-card.png';
 
@@ -18,22 +18,20 @@ export const metadata: Metadata = {
   keywords: [
     'babysea',
     'open-source',
-    'starter-pack',
-    'stripe',
-    'supabase',
-    'upstash',
-    'vercel',
     'ai-infrastructure',
     'control-plane',
     'execution-layer',
-    'developer-tools',
-    'generative-ai',
     'inference-providers',
-    'image-generation',
-    'video-generation',
-    'multimodal',
-    'generative-media',
+    'developer-tools',
     'creative-tools',
+    'generative-ai',
+    'generative-media',
+    'stripe',
+    'supabase',
+    'upstash',
+    'sentry',
+    'netlify',
+    'vercel',
   ],
   icons: {
     icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
