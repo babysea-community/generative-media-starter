@@ -83,7 +83,7 @@
     "supabase": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "8.59.3",
+    "typescript-eslint": "8.60.0",
     "vitest": "4.0.7"
   },
   "pnpm": {
