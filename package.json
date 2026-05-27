@@ -1,6 +1,6 @@
 {
   "name": "generative-media-starter",
-  "version": "0.3.9",
+  "version": "0.4.0",
   "description": "Credit-based generative media app starter with auth, prepaid credits, and private storage.",
   "private": true,
   "license": "Apache-2.0",

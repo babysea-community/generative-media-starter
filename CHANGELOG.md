@@ -2,11 +2,27 @@
 
 All notable changes will be documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-05-27
+
+### Changed
+
+- Updated the standalone starter catalog to `babysea@2.0.0` for SDK-backed generation.
+- Bumped the starter release metadata to `0.4.0` for the SDK 2.0.0 compatibility update.
+
 ## [0.3.9] - 2026-05-25
 
 ### Added
 
 - Added GitHub issue templates (`.github/ISSUE_TEMPLATE/bug_report.yml`, `feature_request.yml`, `config.yml`) and `.github/PULL_REQUEST_TEMPLATE.md` so contributors get a consistent intake form. The template set is identical across all BabySea OSS repos (primitives, starters, SDK) so it can be reused without project-specific adjustments.
+
+### Changed
+
+- Condensed the README into the shared BabyChain-style starter structure and added a dynamic Vercel deployment status badge for `https://generative-media-starter.vercel.app` while keeping the existing realtime GitLab, CircleCI, Codecov, Sentry, CodeQL, and Package checks.
+- Expanded `AGENTS.md` into the shared starter guide structure with Generative-specific auth, Stripe billing, credit ledger, BabySea SDK, private storage, rate-limit, and verification rules.
+
+### Fixed
+
+- Synchronized the doctor deploy-button check with the README Vercel button environment list, including `BABYSEA_API_BASE_URL`.
 
 ## [0.3.8] - 2026-05-25
 

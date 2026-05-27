@@ -1,37 +1,57 @@
-# generative-media-starter
+# Generative Media Starter Agent Guide
 
-`generative-media-starter` is a working deployable application for launching a credit-based generative media product on top of BabySea.
-See [README.md](README.md) for the full story.
+Generative Media Starter is a standalone BabySea OSS starter for launching a credit-based generative media product with Google auth, Stripe prepaid credits, private Supabase Storage, Upstash rate limits, and BabySea SDK-backed generation.
 
-This file mirrors the README so deploys, IDEs, and tooling that read `AGENTS.md` see the same context.
+## Scope
+
+Use this guide for changes inside the Generative Media Starter, especially auth, Stripe billing, credit settlement, BabySea SDK generation, private storage, rate limits, deploy configuration, and starter documentation.
+
+## Working Rules
+
+- State assumptions before changing billing, credit settlement, auth, storage, rate limits, or deployment behavior.
+- Keep changes surgical. Do not refactor the app boundary, database functions, or webhook flow unless the requested behavior requires it.
+- Prefer the smallest implementation that preserves the credit ledger invariant.
+- Update only docs, env examples, doctor checks, tests, or changelog entries that are directly affected by the change.
+- Verify with the narrowest useful command first, then broaden when shared behavior is touched.
 
 ## Layout
 
-| Path                                    | Purpose                                                                                          |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `app/`                                  | Next.js App Router pages: landing, login, dashboard (Generate + Billing), Stripe webhook route   |
-| `lib/app-config.ts`                     | Single source of truth for the model, default size, and credit packs                             |
-| `lib/babysea.ts`                        | Server-only BabySea SDK client (schema load, cost estimate, generation)                          |
-| `lib/stripe.ts`, `lib/stripe-prices.ts` | Stripe client and lookup-key/price-id resolution                                                 |
-| `lib/supabase/`                         | Supabase server, browser, and service-role clients                                               |
-| `lib/storage.ts`                        | Private `generated-media` bucket helpers and signed URL minting                                  |
-| `lib/rate-limit.ts`                     | Upstash Redis rate-limit policy (production-required)                                            |
-| `lib/env.ts`                            | Zod-validated environment variable contract                                                      |
-| `supabase/migrations/`                  | PostgreSQL migrations: starter schema, BabySea key column, output preservation, bucket hardening |
-| `scripts/doctor.mjs`                    | Preflight validator for env, BabySea, Stripe, Supabase, Upstash, and Vercel/Netlify config       |
-| `docs/`                                 | Supabase, Stripe, deploy-vercel, deploy-netlify, and customization guides                        |
-| `proxy.ts`                              | Next.js middleware (Supabase auth refresh)                                                       |
+| Path                              | Purpose                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------- |
+| `app/page.tsx`                    | Public landing page                                                                       |
+| `app/login`                       | Supabase Google OAuth entry point                                                         |
+| `app/auth/callback/route.ts`      | Supabase auth callback                                                                    |
+| `app/dashboard`                   | Private dashboard, Generate, and Billing surfaces                                         |
+| `app/api/stripe/webhook/route.ts` | Stripe webhook verifier and credit grant entry point                                      |
+| `lib/app-config.ts`               | Model, default cost, BabySea base URL, and credit packs                                   |
+| `lib/inference/babysea.ts`        | Server-only BabySea SDK execution helper                                                  |
+| `lib/billing/stripe.ts`           | Stripe server client                                                                      |
+| `lib/billing/prices.ts`           | Stripe lookup-key and price-id resolution                                                 |
+| `lib/database/*`                  | Supabase server, proxy, and service-role clients                                          |
+| `lib/storage/index.ts`            | Private `generated-media` bucket helpers and signed URL minting                           |
+| `lib/security/rate-limit.ts`      | Upstash Redis rate-limit policy                                                           |
+| `lib/utils/env.ts`                | Environment helpers                                                                       |
+| `supabase/migrations`             | Starter schema, BabySea key column, output preservation, and bucket hardening             |
+| `scripts/doctor.mjs`              | Preflight validator for env, BabySea, Stripe, Supabase, Upstash, and deploy-button config |
+| `docs`                            | Supabase, Stripe, deployment, and customization guides                                    |
 
 ## Conventions
 
-- **Apache 2.0** license. Apply the header in every source file.
-- **One model, one execution surface.** Default to `bfl/flux-schnell` through the official `babysea` TypeScript SDK. Do not bypass the SDK with provider-specific request code.
-- **Server-only secrets.** `BABYSEA_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SUPABASE_SECRET_KEY`, and Upstash tokens never appear in browser bundles. Browser code only sees publishable keys.
-- **Settlement invariant.** A generation cannot spend credits unless a reserve ledger event exists. Failed dispatch refunds the reservation. All grants/reserves/charges/refunds go through atomic Postgres RPCs.
-- **Idempotent webhooks.** Stripe events deduplicate via `processed_stripe_events` before granting credits.
-- **Schema-driven pricing.** Read BabySea SDK model metadata and cost estimates at runtime; never hardcode prices in the client.
-- **Private storage.** Generated assets live in the private `generated-media` Supabase bucket and are served via signed URLs.
-- **Production rate limiting.** Upstash Redis is required in production; missing tokens fail fast before accepting generations.
-- **TypeScript:** strict mode, no `any`.
-- **SQL:** RLS enabled on every user-owned table, privileged writes only through `SECURITY DEFINER` functions.
-- **Doctor never prints secrets.** `pnpm run doctor` validates wiring without leaking values.
+- Use the official `babysea` TypeScript SDK for model metadata, cost estimates, generation creation, and result polling. Do not add provider-specific request code.
+- Keep `BABYSEA_API_KEY`, Stripe secrets, `SUPABASE_SECRET_KEY`, Upstash tokens, and Sentry auth tokens server-side.
+- A generation cannot spend credits unless a reserve ledger event exists. Failed dispatch refunds the reservation.
+- Stripe events deduplicate via `processed_stripe_events` before granting credits.
+- Read BabySea SDK model metadata and cost estimates at runtime; do not hardcode client-side generation pricing.
+- Generated assets live in the private `generated-media` Supabase bucket and are served through signed URLs.
+- Upstash Redis is required for production generation rate limiting.
+- RLS must protect user-owned tables; privileged writes should go through controlled server-side code or `SECURITY DEFINER` functions.
+- `pnpm run doctor` must validate wiring without printing secrets.
+
+## Verification
+
+- `pnpm run doctor`
+- `pnpm format`
+- `pnpm lint`
+- `pnpm typecheck`
+- `pnpm test:run`
+- `pnpm build`

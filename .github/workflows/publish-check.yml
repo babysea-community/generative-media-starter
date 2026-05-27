@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      NEXT_PUBLIC_SITE_URL: https://generative-media-starter.example.com
+      NEXT_PUBLIC_SITE_URL: https://your-starter.example.com
       NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
       NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci_supabase_public_key
       SUPABASE_SECRET_KEY: ci_supabase_secret_key

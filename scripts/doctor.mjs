@@ -27,7 +27,7 @@ const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1', '::1']);
 const GENERATIVE_REPOSITORY_URL =
   'https://github.com/babysea-community/generative-media-starter';
 const GENERATIVE_VERCEL_DEPLOY_URL =
-  'https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,BABYSEA_API_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN';
+  'https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN';
 const GENERATIVE_NETLIFY_DEPLOY_URL = `https://app.netlify.com/start/deploy?repository=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_NETLIFY_TEMPLATE_ENV = [
   'NEXT_PUBLIC_SITE_URL',
