@@ -12,7 +12,7 @@ catalog:
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
   '@upstash/ratelimit': 2.0.8
-  '@upstash/redis': 1.36.2
+  '@upstash/redis': 1.38.0
   babysea: 2.0.0
   babel-plugin-react-compiler: 1.0.0
   clsx: 2.1.1
