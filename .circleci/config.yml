@@ -7,15 +7,23 @@ jobs:
     working_directory: ~/project
     environment:
       NEXT_PUBLIC_SITE_URL: https://generative-media-starter.example.com
-      BABYSEA_API_KEY: ci
-      STRIPE_SECRET_KEY: ci
-      STRIPE_WEBHOOK_SECRET: ci
-      NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321
-      NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci
-      SUPABASE_SECRET_KEY: ci
-      UPSTASH_REDIS_REST_URL: https://ci.example.com
-      UPSTASH_REDIS_REST_TOKEN: ci
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci_supabase_public_key
+      SUPABASE_SECRET_KEY: ci_supabase_secret_key
+      BABYSEA_API_KEY: ci_babysea_api_key
+      BABYSEA_API_BASE_URL: https://api.us.babysea.live
+      STRIPE_SECRET_KEY: ci_stripe_secret_key
+      STRIPE_WEBHOOK_SECRET: ci_stripe_webhook_secret
+      STRIPE_PRICE_STARTER: ci
+      STRIPE_PRICE_BUILDER: ci
+      STRIPE_PRICE_PRODUCTION: ci
+      UPSTASH_REDIS_REST_URL: https://example.upstash.io
+      UPSTASH_REDIS_REST_TOKEN: ci_upstash_redis_rest_token
+      NEXT_PUBLIC_SENTRY_DSN: https://example.sentry.io
       NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci
+      SENTRY_ORG: ci
+      SENTRY_PROJECT: ci
+      SENTRY_AUTH_TOKEN: ci_sentry_auth_token
     steps:
       - checkout
       - restore_cache:
