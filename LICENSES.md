@@ -1,6 +1,6 @@
 # License Compliance
 
-Sherin is Apache-2.0. Dependency license review is part of the public supply-chain posture for the standalone repository.
+Generative Media Starter is Apache-2.0. Dependency license review is part of the public supply-chain posture for the standalone repository.
 
 ## Allowed Licenses
 
