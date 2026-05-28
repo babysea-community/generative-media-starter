@@ -102,7 +102,7 @@ See [`CHANGELOG.md`](CHANGELOG.md) to track releases and public contract changes
 
 ---
 
-## Quick Start
+## Quickstart
 
 Run locally:
 
@@ -124,7 +124,7 @@ pnpm dev
 
 Open <http://localhost:3011>.
 
-## Credits And Generation
+## Credits and generation
 
 Set `BABYSEA_API_KEY` server-side so the app can call the BabySea SDK for model metadata, cost estimates, and generation execution.
 
@@ -199,7 +199,7 @@ Point Stripe webhooks at `https://your-app.example.com/api/stripe/webhook` and l
 | Rate limit exceeded                         | Wait for the configured Upstash window or tune [`lib/security/rate-limit.ts`](lib/security/rate-limit.ts). |
 | Sentry source maps are not uploaded         | Confirm `SENTRY_ORG`, `SENTRY_PROJECT`, and `SENTRY_AUTH_TOKEN` exist only in build/CI secrets.            |
 
-## Security and Compliance
+## Security and compliance
 
 Generative Media Starter publishes its trust signals through public GitLab and GitHub checks so contributors can inspect the actual CI configuration, jobs, and reports.
 
