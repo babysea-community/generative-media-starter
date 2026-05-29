@@ -1,7 +1,7 @@
 {
   "name": "generative-media-starter",
   "version": "0.4.0",
-  "description": "Credit-based generative media app starter with auth, prepaid credits, and private storage.",
+  "description": "Credit-based generative media app with auth, prepaid credits, and private storage.",
   "private": true,
   "license": "Apache-2.0",
   "homepage": "https://demo.generative-media-starter.babysea.live",

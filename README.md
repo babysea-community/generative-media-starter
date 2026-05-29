@@ -1,27 +1,19 @@
 <div align="center">
 
-<p>
-  <img src="public/icon.png" width="120" alt="Generative Media Starter icon" />
-</p>
+<img src="public/icon.png" width="120" alt="Generative Media Starter icon" />
 
-<h1>
-  Generative Media Starter
-</h1>
+# Generative Media Starter
 
-<p>
-  Credit-based generative media app starter with auth, prepaid credits, and private storage.
-</p>
+Credit-based generative media app with auth, prepaid credits, and private storage.
 
-<p>
-  <strong>Ship with auth, credits, storage, and generation</strong>
-</p>
+### Ship with auth, credits, storage, and generation
 
 <br />
 
 <strong>Project details</strong>
 
-[![BabySea Demo](https://custom-icon-badges.demolab.com/badge/babysea-demo-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://demo.generative-media-starter.babysea.live)
-[![BabySea Templates](https://custom-icon-badges.demolab.com/badge/babysea-templates-E11D48?style=for-the-badge&logo=babysea&logoColor=white)](https://babysea.ai/templates/generative-media-starter)
+[![BabySea Demo](https://custom-icon-badges.demolab.com/badge/view-demo-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://demo.generative-media-starter.babysea.live)
+[![BabySea Templates](https://custom-icon-badges.demolab.com/badge/find-templates-E11D48?style=for-the-badge&logo=babysea&logoColor=white)](https://babysea.ai/templates/generative-media-starter)
 [![BabySea OSS Starter](https://custom-icon-badges.demolab.com/badge/oss-starter-2563EB?style=for-the-badge&logo=babysea&logoColor=white)](#babysea-oss-taxonomy)
 [![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/oss_status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
 [![License](https://custom-icon-badges.demolab.com/badge/license-apache_2.0-059669?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)

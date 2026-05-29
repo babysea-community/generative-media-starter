@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 
 const title = 'Generative Media Starter';
 const description =
-  'Credit-based generative media app starter with auth, prepaid credits, and private storage.';
+  'Credit-based generative media app with auth, prepaid credits, and private storage.';
 const socialImageUrl =
   'https://cdn.babysea.live/assets/oss/generative-media-starter-card.png';
 
