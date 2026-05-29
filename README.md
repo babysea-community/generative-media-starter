@@ -50,9 +50,9 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 
 <strong>One-click deploy</strong>
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/hxPyEE?referralCode=_FJpRb)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/babysea-community/generative-media-starter)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)  
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/hxPyEE?referralCode=_FJpRb)  
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/babysea-community/generative-media-starter)  
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 <br />

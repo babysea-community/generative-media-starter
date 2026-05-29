@@ -4,13 +4,21 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## Unreleased
 
+## [0.4.1] - 2026-05-29
+
 ### Added
 
+- Added Railway and Render deployment paths, including the published Railway template button, Render deploy button, Render blueprint, README guidance, and doctor checks for the expanded deploy-button set.
 - Added `LICENSES.md` and a README security/compliance section documenting public GitLab and GitHub trust signals.
 
 ### Changed
 
+- Bumped the starter release metadata to `0.4.1` for the deploy-host expansion.
 - Standardized GitLab application security coverage with SAST-IaC, guarded Container Scanning, shared security variables, and license-compliance documentation.
+
+### Notes
+
+- Cloudflare Workers deploy support was evaluated and intentionally left out for this starter because the OpenNext Cloudflare adapter does not support the Next.js Node middleware required by the Supabase auth-refresh proxy.
 
 ## [0.4.0] - 2026-05-27
 
