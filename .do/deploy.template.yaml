@@ -1,0 +1,38 @@
+spec:
+  name: generative-media-starter
+  services:
+    - name: web
+      environment_slug: node-js
+      git:
+        branch: main
+        repo_clone_url: https://github.com/babysea-community/generative-media-starter.git
+      build_command: corepack enable && pnpm install --frozen-lockfile && pnpm build
+      run_command: pnpm start -- -p $PORT
+      envs:
+        - key: NEXT_PUBLIC_SITE_URL
+          scope: RUN_AND_BUILD_TIME
+        - key: NEXT_PUBLIC_SUPABASE_URL
+          scope: RUN_AND_BUILD_TIME
+        - key: NEXT_PUBLIC_SUPABASE_PUBLIC_KEY
+          scope: RUN_AND_BUILD_TIME
+        - key: SUPABASE_SECRET_KEY
+          scope: RUN_TIME
+          type: SECRET
+        - key: BABYSEA_API_KEY
+          scope: RUN_TIME
+          type: SECRET
+        - key: BABYSEA_API_BASE_URL
+          scope: RUN_TIME
+          value: https://api.us.babysea.ai
+        - key: STRIPE_SECRET_KEY
+          scope: RUN_TIME
+          type: SECRET
+        - key: STRIPE_WEBHOOK_SECRET
+          scope: RUN_TIME
+          type: SECRET
+        - key: UPSTASH_REDIS_REST_URL
+          scope: RUN_TIME
+          type: SECRET
+        - key: UPSTASH_REDIS_REST_TOKEN
+          scope: RUN_TIME
+          type: SECRET

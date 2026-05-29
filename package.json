@@ -23,11 +23,7 @@
     "stripe",
     "supabase",
     "upstash",
-    "sentry",
-    "netlify",
-    "railway",
-    "render",
-    "vercel"
+    "sentry"
   ],
   "engines": {
     "node": "24.x"
