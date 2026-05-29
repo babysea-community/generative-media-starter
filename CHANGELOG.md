@@ -59,7 +59,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 ### Changed
 
 - Aligned the standalone pnpm catalog with Sherin's Tailwind CSS, Tailwind PostCSS, and tailwind-merge versions.
-- Simplified Vercel and Netlify deployment config to the Sherin-style framework/plugin defaults while keeping app-specific environment prompts.
+- Simplified Netlify and Vercel deployment config to the Sherin-style framework/plugin defaults while keeping app-specific environment prompts.
 
 ### Fixed
 
@@ -82,7 +82,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 ### Added
 
 - Added the Vercel Deploy workflow so Generative Media Starter exposes the same preview/production deployment check as Sherin when Vercel environment secrets are configured.
-- Added doctor validation for the README Vercel and Netlify deploy buttons and Netlify template environment prompts.
+- Added doctor validation for the README Netlify and Vercel deploy buttons and Netlify template environment prompts.
 
 ## [0.3.2] - 2026-05-23
 
@@ -157,7 +157,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 ### Changed
 
 - Added a local `pnpm-workspace.yaml` catalog and switched package dependency specifiers to `catalog:` so standalone installs match the Sherin starter pattern.
-- Updated Vercel and Netlify deployment configuration to use the starter's actual BabySea, Stripe, Supabase, and Upstash environment variables instead of Sherin-specific variables.
+- Updated Netlify and Vercel deployment configuration to use the starter's actual BabySea, Stripe, Supabase, and Upstash environment variables instead of Sherin-specific variables.
 - Aligned deployment docs, doctor checks, and GitHub package validation with the local pnpm workspace install flow.
 
 ### Fixed
@@ -189,7 +189,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ### Security
 
-- Added baseline browser security headers in `next.config.ts` (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` opt-out for camera/microphone/geolocation/browsing-topics, `Strict-Transport-Security` with two-year max-age + preload, and `X-DNS-Prefetch-Control`) so Vercel/Netlify deployments ship with the same hardening defaults as Vercel OSS reference apps.
+- Added baseline browser security headers in `next.config.ts` (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` opt-out for camera/microphone/geolocation/browsing-topics, `Strict-Transport-Security` with two-year max-age + preload, and `X-DNS-Prefetch-Control`) so Netlify/Vercel deployments ship with the same hardening defaults as Vercel OSS reference apps.
 - Disabled Next.js `logging.fetches.fullUrl` in production builds so Stripe, Supabase, BabySea, and signed Supabase Storage URLs (which carry tokens in query strings) no longer leak into hosted server logs. Full URLs remain enabled in development for local debugging.
 - Extended the `lib/env.ts` hosted-runtime guard beyond Vercel to also cover `NETLIFY` and `NODE_ENV === 'production'`, preventing `localhost` URLs from passing `NEXT_PUBLIC_SITE_URL` / `NEXT_PUBLIC_SUPABASE_URL` validation on Netlify or any other hosted target.
 - Pinned the Stripe SDK `apiVersion` to `2026-02-25.clover` in `lib/stripe.ts` so webhook payload shapes and Checkout responses stay deterministic across Stripe account API-version upgrades; documented the version-bump pairing rule in source.

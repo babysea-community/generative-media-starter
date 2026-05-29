@@ -42,6 +42,8 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 [![Upstash](https://img.shields.io/badge/upstash-00E9A3?style=for-the-badge&logo=upstash&logoColor=white)](https://upstash.com)
 [![Sentry](https://img.shields.io/badge/sentry-181225?style=for-the-badge&logo=sentry&logoColor=white)](https://sentry.io)
 [![Netlify](https://img.shields.io/badge/netlify-05BDBA?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com)
+[![Railway](https://img.shields.io/badge/railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://railway.com)
+[![Render](https://img.shields.io/badge/render-000000?style=for-the-badge&logo=render&logoColor=white)](https://render.com)
 [![Vercel](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
 <br/>
@@ -49,6 +51,8 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 <strong>One-click deploy</strong>
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/hxPyEE?referralCode=_FJpRb)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/babysea-community/generative-media-starter)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 <br />
@@ -160,6 +164,14 @@ Keep the checked-in [`vercel.json`](vercel.json) framework settings. Configure S
 
 [`netlify.toml`](netlify.toml) builds with `pnpm build` and the Next.js plugin. Add every runtime variable from [`.env.example`](.env.example), set `NEXT_PUBLIC_SITE_URL`, and validate the deployment with `pnpm run doctor` before promoting it.
 
+### Render
+
+[`render.yaml`](render.yaml) builds with `pnpm build` and runs `pnpm start -- -p $PORT`. Fill the blueprint environment values, set `NEXT_PUBLIC_SITE_URL` to the Render or custom domain, and configure Supabase auth callback URLs before production use.
+
+### Railway
+
+Use the Deploy on Railway button above to start from the published Generative Media Starter template, or create a new Railway project from the public repository. Add every runtime variable from [`.env.example`](.env.example), set `NEXT_PUBLIC_SITE_URL` to the Railway or custom domain, and configure Supabase auth callback URLs before production use.
+
 ### Stripe
 
 Point Stripe webhooks at `https://your-app.example.com/api/stripe/webhook` and listen for `checkout.session.completed` plus `checkout.session.async_payment_succeeded`. See [`docs/stripe.md`](docs/stripe.md) for CLI commands and the production webhook checklist.
@@ -176,7 +188,7 @@ Point Stripe webhooks at `https://your-app.example.com/api/stripe/webhook` and l
 | Storage     | `lib/storage/index.ts`, `supabase/migrations/004_harden_generated_media_bucket.sql`                             |
 | Rate limits | `lib/security/rate-limit.ts`                                                                                    |
 | Monitoring  | `instrumentation.ts`, `instrumentation-client.ts`, `lib/monitoring`, `scripts/sentry-project-check.mjs`         |
-| Deploy      | `.env.example`, `netlify.toml`, `vercel.json`, `scripts/doctor.mjs`                                             |
+| Deploy      | `.env.example`, `netlify.toml`, `render.yaml`, `vercel.json`, `scripts/doctor.mjs`                              |
 
 ## Troubleshooting
 

@@ -25,6 +25,8 @@
     "upstash",
     "sentry",
     "netlify",
+    "railway",
+    "render",
     "vercel"
   ],
   "engines": {

@@ -29,6 +29,9 @@ const GENERATIVE_REPOSITORY_URL =
 const GENERATIVE_VERCEL_DEPLOY_URL =
   'https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN';
 const GENERATIVE_NETLIFY_DEPLOY_URL = `https://app.netlify.com/start/deploy?repository=${GENERATIVE_REPOSITORY_URL}`;
+const GENERATIVE_RAILWAY_DEPLOY_URL =
+  'https://railway.com/deploy/hxPyEE?referralCode=_FJpRb';
+const GENERATIVE_RENDER_DEPLOY_URL = `https://render.com/deploy?repo=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_NETLIFY_TEMPLATE_ENV = [
   'NEXT_PUBLIC_SITE_URL',
   'BABYSEA_API_KEY',
@@ -393,11 +396,37 @@ await runCheck('Netlify deployment config', () => {
   return 'Netlify build command, publish directory, and template environment verified';
 });
 
-await runCheck('Deploy buttons', () => {
+await runCheck('Render deployment config', () => {
+  const render = readRequiredFile('render.yaml');
+
+  for (const expected of [
+    'runtime: node',
+    'autoDeploy: false',
+    'buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build',
+    'startCommand: pnpm start -- -p $PORT',
+  ]) {
+    if (!render.includes(expected)) {
+      throw new Error(`render.yaml must include ${expected}`);
+    }
+  }
+
+  for (const name of GENERATIVE_NETLIFY_TEMPLATE_ENV) {
+    if (!render.includes(`key: ${name}`)) {
+      throw new Error(`render.yaml environment must include ${name}`);
+    }
+  }
+
+  return 'Render blueprint, start command, and environment prompts verified';
+});
+
+await runCheck('Deployment targets', () => {
   const readme = readRequiredFile('README.md');
   const netlify = readRequiredFile('netlify.toml');
+  const render = readRequiredFile('render.yaml');
   const expectedVercelButton = `[![Deploy with Vercel](https://vercel.com/button)](${GENERATIVE_VERCEL_DEPLOY_URL})`;
   const expectedNetlifyButton = `[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](${GENERATIVE_NETLIFY_DEPLOY_URL})`;
+  const expectedRailwayButton = `[![Deploy on Railway](https://railway.com/button.svg)](${GENERATIVE_RAILWAY_DEPLOY_URL})`;
+  const expectedRenderButton = `[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](${GENERATIVE_RENDER_DEPLOY_URL})`;
 
   if (!readme.includes(expectedVercelButton)) {
     throw new Error(
@@ -411,8 +440,33 @@ await runCheck('Deploy buttons', () => {
     );
   }
 
+  if (!readme.includes(expectedRailwayButton)) {
+    throw new Error(
+      'README Railway deploy button must use the published Generative Media Starter template',
+    );
+  }
+
+  if (!readme.includes(expectedRenderButton)) {
+    throw new Error(
+      'README Render deploy button must clone babysea-community/generative-media-starter',
+    );
+  }
+
+  if (
+    !readme.includes('### Railway') ||
+    !readme.includes(
+      'Use the Deploy on Railway button above to start from the published Generative Media Starter template',
+    )
+  ) {
+    throw new Error('README Railway deployment guidance is missing');
+  }
+
   if (!netlify.includes('[template.environment]')) {
     throw new Error('netlify.toml must include template environment prompts');
+  }
+
+  if (!render.includes('services:')) {
+    throw new Error('render.yaml must include a services blueprint');
   }
 
   for (const name of GENERATIVE_NETLIFY_TEMPLATE_ENV) {
@@ -421,7 +475,7 @@ await runCheck('Deploy buttons', () => {
     }
   }
 
-  return 'Vercel and Netlify deploy buttons target the public starter repo';
+  return 'Netlify, Railway, Render, and Vercel deploy buttons plus Railway deployment guidance are wired';
 });
 
 await runCheck('Security headers (next.config.ts)', () => {
