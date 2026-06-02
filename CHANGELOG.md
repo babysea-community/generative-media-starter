@@ -6,7 +6,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ### Added
 
-- Added DigitalOcean App Platform and Heroku Button deploy manifests, README buttons, deployment guidance, and doctor validation for the expanded one-click deploy set.
+- Added DigitalOcean App Platform Button deploy manifests, README buttons, deployment guidance, and doctor validation for the expanded one-click deploy set.
 
 ## [0.4.1] - 2026-05-29
 

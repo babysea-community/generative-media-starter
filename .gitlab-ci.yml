@@ -36,7 +36,7 @@ variables:
   CS_DISABLE_DEPENDENCY_LIST: 'false'
   DAST_WEBSITE: https://demo.generative-media-starter.babysea.live
   DAST_BROWSER_SCAN: 'true'
-  NEXT_PUBLIC_SITE_URL: https://your-starter.example.com
+  NEXT_PUBLIC_SITE_URL: https://your-app.example.com
   NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
   NEXT_PUBLIC_SUPABASE_PUBLIC_KEY: ci_supabase_public_key
   SUPABASE_SECRET_KEY: ci_supabase_secret_key

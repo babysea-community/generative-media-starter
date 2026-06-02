@@ -30,7 +30,6 @@ const GENERATIVE_VERCEL_DEPLOY_URL =
   'https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN';
 const GENERATIVE_NETLIFY_DEPLOY_URL = `https://app.netlify.com/start/deploy?repository=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_DIGITALOCEAN_DEPLOY_URL = `https://cloud.digitalocean.com/apps/new?repo=${GENERATIVE_REPOSITORY_URL}/tree/main`;
-const GENERATIVE_HEROKU_DEPLOY_URL = `https://www.heroku.com/deploy?template=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_RAILWAY_DEPLOY_URL =
   'https://railway.com/deploy/hxPyEE?referralCode=_FJpRb';
 const GENERATIVE_RENDER_DEPLOY_URL = `https://render.com/deploy?repo=${GENERATIVE_REPOSITORY_URL}`;
@@ -429,7 +428,6 @@ await runCheck('Deployment targets', () => {
   const render = readRequiredFile('render.yaml');
   const expectedVercelButton = `[![Deploy with Vercel](https://vercel.com/button)](${GENERATIVE_VERCEL_DEPLOY_URL})`;
   const expectedDigitalOceanButton = `[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](${GENERATIVE_DIGITALOCEAN_DEPLOY_URL})`;
-  const expectedHerokuButton = `[![Deploy](https://www.herokucdn.com/deploy/button.svg)](${GENERATIVE_HEROKU_DEPLOY_URL})`;
   const expectedNetlifyButton = `[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](${GENERATIVE_NETLIFY_DEPLOY_URL})`;
   const expectedRailwayButton = `[![Deploy on Railway](https://railway.com/button.svg)](${GENERATIVE_RAILWAY_DEPLOY_URL})`;
   const expectedRenderButton = `[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](${GENERATIVE_RENDER_DEPLOY_URL})`;
@@ -443,12 +441,6 @@ await runCheck('Deployment targets', () => {
   if (!readme.includes(expectedDigitalOceanButton)) {
     throw new Error(
       'README DigitalOcean deploy button must clone babysea-community/generative-media-starter from main',
-    );
-  }
-
-  if (!readme.includes(expectedHerokuButton)) {
-    throw new Error(
-      'README Heroku deploy button must use the babysea-community/generative-media-starter template',
     );
   }
 
@@ -481,7 +473,6 @@ await runCheck('Deployment targets', () => {
 
   for (const [heading, description] of [
     ['### DigitalOcean', 'DigitalOcean App Platform service'],
-    ['### Heroku', 'Heroku Button manifest'],
   ]) {
     if (!readme.includes(heading) || !readme.includes(description)) {
       throw new Error(
@@ -533,7 +524,7 @@ await runCheck('Deployment targets', () => {
     }
   }
 
-  return 'DigitalOcean, Heroku, Netlify, Railway, Render, and Vercel deploy buttons plus deployment guidance are wired';
+  return 'DigitalOcean, Netlify, Railway, Render, and Vercel deploy buttons plus deployment guidance are wired';
 });
 
 await runCheck('Security headers (next.config.ts)', () => {
