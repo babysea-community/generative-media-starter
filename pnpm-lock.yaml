@@ -43,8 +43,8 @@ catalogs:
       specifier: 1.0.0
       version: 1.0.0
     babysea:
-      specifier: 1.4.6
-      version: 1.4.6
+      specifier: 2.0.0
+      version: 2.0.0
     clsx:
       specifier: 2.1.1
       version: 2.1.1
@@ -115,7 +115,7 @@ importers:
         version: 1.36.2
       babysea:
         specifier: 'catalog:'
-        version: 1.4.6
+        version: 2.0.0
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
@@ -1808,9 +1808,9 @@ packages:
   babel-plugin-react-compiler@1.0.0:
     resolution: {integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw==}
 
-  babysea@1.4.6:
-    resolution: {integrity: sha512-K4hoXvzoKXmhFvnSpjcI76A7/7feQgKgtr1TIAIr9stuYBbqlS2Hwmhouza474KQejWHkqbNeB8Z5+T03vCeNg==}
-    engines: {node: '>=18'}
+  babysea@2.0.0:
+    resolution: {integrity: sha512-Yw6WV7o+KBr78bK6n2vAVWsYQjO5j0lwSZgBv8B+L8xu49h0/vD7BzbUTZQtoCN+PFiltIO+rAssw9l6mCQdLg==}
+    engines: {node: '>=22'}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -5093,7 +5093,9 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.0
 
-  babysea@1.4.6: {}
+  babysea@2.0.0:
+    dependencies:
+      zod: 3.25.76
 
   balanced-match@1.0.2: {}
 
