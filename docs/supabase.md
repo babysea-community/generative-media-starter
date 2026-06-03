@@ -85,7 +85,7 @@ Use the exact callback URL for the deployed app.
 For the BabySea demo domain:
 
 ```text
-https://demo.generative-media-starter.babysea.live/auth/callback
+https://generative-media-starter.babysea.live/auth/callback
 ```
 
 ## 4. Service role safety

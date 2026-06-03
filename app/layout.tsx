@@ -8,7 +8,7 @@ const socialImageUrl =
   'https://cdn.babysea.live/assets/oss/generative-media-starter-card.png';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://demo.generative-media-starter.babysea.live'),
+  metadataBase: new URL('https://generative-media-starter.babysea.live'),
   applicationName: title,
   title: {
     default: title,

@@ -74,7 +74,7 @@ NEXT_PUBLIC_SITE_URL=https://your-app.example.com
 For the BabySea demo, the value is:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://demo.generative-media-starter.babysea.live
+NEXT_PUBLIC_SITE_URL=https://generative-media-starter.babysea.live
 ```
 
 After changing `NEXT_PUBLIC_SITE_URL`, redeploy the app. Stripe Checkout uses

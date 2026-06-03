@@ -4,7 +4,7 @@
   "description": "Credit-based generative media app with auth, prepaid credits, and private storage.",
   "private": true,
   "license": "Apache-2.0",
-  "homepage": "https://demo.generative-media-starter.babysea.live",
+  "homepage": "https://generative-media-starter.babysea.live",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/babysea-community/generative-media-starter.git"
