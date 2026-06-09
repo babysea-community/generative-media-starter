@@ -12,3 +12,6 @@ dist
 .env*.local
 coverage
 supabase/.temp
+.wrangler
+.open-next
+cloudflare-env.d.ts

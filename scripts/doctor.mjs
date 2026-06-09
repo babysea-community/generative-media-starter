@@ -31,7 +31,7 @@ const GENERATIVE_VERCEL_DEPLOY_URL =
 const GENERATIVE_NETLIFY_DEPLOY_URL = `https://app.netlify.com/start/deploy?repository=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_DIGITALOCEAN_DEPLOY_URL = `https://cloud.digitalocean.com/apps/new?repo=${GENERATIVE_REPOSITORY_URL}/tree/main`;
 const GENERATIVE_RAILWAY_DEPLOY_URL =
-  'https://railway.com/deploy/hxPyEE?referralCode=_FJpRb';
+  'https://railway.com/deploy/generative-media-starter?referralCode=_FJpRb';
 const GENERATIVE_RENDER_DEPLOY_URL = `https://render.com/deploy?repo=${GENERATIVE_REPOSITORY_URL}`;
 const GENERATIVE_NETLIFY_TEMPLATE_ENV = [
   'NEXT_PUBLIC_SITE_URL',

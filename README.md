@@ -30,7 +30,7 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 [![Codecov](https://img.shields.io/codecov/c/github/babysea-community/generative-media-starter?style=for-the-badge&label=codecov&logo=codecov&logoColor=white&color=FF0077&token=aNtHG9uJxY)](https://codecov.io/github/babysea-community/generative-media-starter)
 [![Sentry](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/sentry-check.yml?style=for-the-badge&label=sentry&logo=sentry&logoColor=white&color=181225)](https://github.com/babysea-community/generative-media-starter/actions/workflows/sentry-check.yml)
 [![CodeQL](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/codeql.yml?style=for-the-badge&label=codeql&logo=github&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/codeql.yml)
-[![Package](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/publish-check.yml?style=for-the-badge&label=package&logo=npm&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/publish-check.yml)
+[![Package](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/package-check.yml?style=for-the-badge&label=package&logo=npm&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/package-check.yml)
 
 <br/>
 
@@ -49,9 +49,9 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 <strong>One-click deploy</strong>
 
 [![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/babysea-community/generative-media-starter/tree/main)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/babysea-community/generative-media-starter)  
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/generative-media-starter?referralCode=_FJpRb)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/babysea-community/generative-media-starter)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/babysea-community/generative-media-starter)  
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbabysea-community%2Fgenerative-media-starter&project-name=generative-media-starter&repository-name=generative-media-starter&env=NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLIC_KEY,SUPABASE_SECRET_KEY,BABYSEA_API_KEY,BABYSEA_API_BASE_URL,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 <br />
@@ -226,4 +226,4 @@ Generative Media Starter is an Apache-2.0 open-source starter in [`babysea-commu
 
 ## License
 
-[Apache License 2.0](LICENSE). Use it, fork it, ship it. Just keep the notice.
+[Apache License 2.0](LICENSE). Use it, fork it, ship it.
