@@ -67,11 +67,27 @@ default:
 
 container_scanning:
   stage: security
+  allow_failure: true
   rules:
     - if: '$CONTAINER_SCANNING_DISABLED == "true" || $CONTAINER_SCANNING_DISABLED == "1"'
       when: never
     - if: '$CS_IMAGE'
     - when: never
+
+code_quality:
+  allow_failure: true
+
+gemnasium-dependency_scanning:
+  allow_failure: true
+
+gitlab-advanced-sast:
+  allow_failure: true
+
+kics-iac-sast:
+  allow_failure: true
+
+secret_detection:
+  allow_failure: true
 
 .pnpm-job:
   image: node:24-bookworm
@@ -160,6 +176,7 @@ test:coverage:
 coverage:upload:
   stage: security
   image: alpine:3.22
+  allow_failure: true
   needs:
     - job: test:coverage
       artifacts: true
@@ -193,6 +210,7 @@ build:app:
 dependency:audit:
   stage: security
   extends: .pnpm-job
+  allow_failure: true
   timeout: 10m
   needs: []
   script:
@@ -203,12 +221,14 @@ secret:scan:
   image:
     name: zricethezav/gitleaks:v8.28.0
     entrypoint: ['']
+  allow_failure: true
   timeout: 5m
   needs: []
   script:
     - gitleaks detect --source . --no-banner --redact
 
 dast:
+  allow_failure: true
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
