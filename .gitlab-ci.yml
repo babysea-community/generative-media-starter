@@ -46,15 +46,15 @@ variables:
   BABYSEA_API_BASE_URL: https://api.us.babysea.live
   STRIPE_SECRET_KEY: ci_stripe_secret_key
   STRIPE_WEBHOOK_SECRET: ci_stripe_webhook_secret
-  STRIPE_PRICE_STARTER: ci
-  STRIPE_PRICE_BUILDER: ci
-  STRIPE_PRICE_PRODUCTION: ci
   UPSTASH_REDIS_REST_URL: https://example.upstash.io
   UPSTASH_REDIS_REST_TOKEN: ci_upstash_redis_rest_token
+  STRIPE_PRICE_STARTER: ci_stripe_price_starter
+  STRIPE_PRICE_BUILDER: ci_stripe_price_builder
+  STRIPE_PRICE_PRODUCTION: ci_stripe_price_production
   NEXT_PUBLIC_SENTRY_DSN: https://example.sentry.io
-  NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci
-  SENTRY_ORG: ci
-  SENTRY_PROJECT: ci
+  NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci_sentry_environment
+  SENTRY_ORG: ci_sentry_org
+  SENTRY_PROJECT: ci_sentry_project
   SENTRY_AUTH_TOKEN: ci_sentry_auth_token
 
 default:

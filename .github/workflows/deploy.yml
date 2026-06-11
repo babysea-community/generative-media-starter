@@ -62,7 +62,7 @@ jobs:
           vercel pull --yes \
             --environment="$VERCEL_ENVIRONMENT" \
             --token "$VERCEL_TOKEN"
-      - name: Check generative-media-starter runtime environment
+      - name: Check project Vercel runtime environment
         if: steps.check.outputs.deploy == 'true'
         env:
           VERCEL_ENVIRONMENT: ${{ github.event.inputs.environment == 'preview' && 'preview' || 'production' }}
@@ -122,7 +122,7 @@ jobs:
 
           if (missing.length > 0) {
             console.error(
-              `::error::Missing required generative-media-starter Vercel ${envName} env vars: ${missing.join(', ')}`,
+              `::error::Missing required project Vercel ${envName} env vars: ${missing.join(', ')}`,
             );
             process.exit(1);
           }
@@ -172,7 +172,7 @@ jobs:
             process.exit(1);
           }
 
-          console.log(`generative-media-starter Vercel ${envName} environment has required runtime variables.`);
+          console.log(`Project Vercel ${envName} environment has required runtime variables.`);
           NODE
       - name: Build
         if: steps.check.outputs.deploy == 'true'
