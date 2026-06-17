@@ -2,7 +2,7 @@
 
 All notable changes will be documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
 
 ### Added
 
@@ -39,7 +39,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ### Changed
 
-- Condensed the README into the shared BabyChain-style starter structure and added a dynamic Vercel deployment status badge for `https://generative-media-starter.vercel.app` while keeping the existing realtime GitLab, CircleCI, Codecov, Sentry, CodeQL, and Package checks.
+- Condensed the README into the shared BabyChain-style starter structure and added a dynamic Vercel deployment status badge for `https://generative-media-starter.vercel.app` while keeping the existing realtime GitLab, CircleCI, Sentry, CodeQL, and Package checks.
 - Expanded `AGENTS.md` into the shared starter guide structure with Generative-specific auth, Stripe billing, credit ledger, BabySea SDK, private storage, rate-limit, and verification rules.
 
 ### Fixed
@@ -105,16 +105,9 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 ## [0.3.1] - 2026-05-22
 
-### Added
-
-- Added a CircleCI package-check workflow for Generative Media Starter package validation, production dependency audit, and trusted `main` Codecov CLI upload when `CODECOV_TOKEN` is configured in CircleCI.
-- Added a Snyk Security workflow for Snyk Code SARIF upload, Open Source scanning and monitoring, high/critical dependency gating, and IaC reporting with `SNYK_TOKEN`.
-- Added repository `codecov.yml` with GitHub Actions and CircleCI provider recognition, CI-gated Codecov status, and pull request comment configuration.
-
 ### Changed
 
-- Constrained GitHub Actions Codecov uploads to the explicit Vitest LCOV report to avoid irrelevant uploader search warnings.
-- Updated trusted Package Check Codecov uploads to pass `CODECOV_TOKEN` through the action environment and fail CI when coverage upload fails.
+- Constrained GitHub Actions uploads to the explicit Vitest LCOV report to avoid irrelevant uploader search warnings.
 
 ## [0.3.0] - 2026-05-22
 
@@ -122,7 +115,7 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 
 - Standardized contributing and code-of-conduct guidance with the shared BabySea OSS documentation standard.
 - Moved Generative Media Starter repository metadata, docs links, deploy links, and source links from the `babysea-ai` organization to `babysea-community`.
-- Upgraded Package Check, Sentry Check, and CodeQL workflow actions to Node 24-compatible majors, including `actions/checkout@v6`, `actions/setup-node@v6`, `pnpm/action-setup@v6`, `github/codeql-action@v4`, and `codecov/codecov-action@v6`.
+- Upgraded Package Check, Sentry Check, and CodeQL workflow actions to Node 24-compatible majors, including `actions/checkout@v6`, `actions/setup-node@v6`, `pnpm/action-setup@v6`, `github/codeql-action@v4`.
 
 ### Fixed
 
@@ -135,7 +128,6 @@ All notable changes will be documented here. The format follows [Keep a Changelo
 ### Added
 
 - Added Sentry as optional `@sentry/nextjs` runtime initialization, browser/server instrumentation, no-DSN no-op behavior, source-map upload wrapper, Sentry config tests, and server-side generation error capture.
-- Added Vitest coverage output and Package Check Codecov upload using `coverage/lcov.info`.
 - Added Sherin-style package validation guardrails: lint, coverage, production dependency audit, and gitleaks secret scan.
 
 ## [0.2.8] - 2026-05-21

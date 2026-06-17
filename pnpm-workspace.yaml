@@ -3,7 +3,7 @@ packages:
 
 catalog:
   '@eslint/js': 10.0.1
-  '@next/eslint-plugin-next': 16.2.6
+  '@next/eslint-plugin-next': 16.2.9
   '@sentry/nextjs': 10.40.0
   '@supabase/ssr': 0.8.0
   '@supabase/supabase-js': 2.97.0
@@ -17,7 +17,7 @@ catalog:
   babel-plugin-react-compiler: 1.0.0
   clsx: 2.1.1
   eslint: 10.0.1
-  eslint-config-next: 16.2.6
+  eslint-config-next: 16.2.9
   ignore: 7.0.5
   lucide-react: 0.575.0
   next: 16.2.6
@@ -28,8 +28,11 @@ catalog:
   supabase: 2.78.0
   tailwind-merge: 3.6.0
   tailwindcss: 4.3.0
-  typescript: 5.9.3
+  typescript: 6.0.3
   zod: 3.25.76
+
+overrides:
+  postcss: 8.5.10
 
 onlyBuiltDependencies:
   - '@sentry/cli'
@@ -38,3 +41,11 @@ onlyBuiltDependencies:
   - sharp
   - supabase
   - unrs-resolver
+  - workerd
+
+allowBuilds:
+  '@sentry/cli': true
+  esbuild: true
+  sharp: true
+  supabase: true
+  unrs-resolver: true

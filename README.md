@@ -10,14 +10,14 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 
 <br />
 
-[![Demo](https://custom-icon-badges.demolab.com/badge/view-demo-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://generative-media-starter.babysea.live)
+[![Website](https://custom-icon-badges.demolab.com/badge/view-website-0D9488?style=for-the-badge&logo=babysea&logoColor=white)](https://generative-media-starter.babysea.live)
 
 <br />
 
 <strong>Project details</strong>
 
 [![BabySea OSS Starter](https://custom-icon-badges.demolab.com/badge/oss-starter-2563EB?style=for-the-badge&logo=babysea&logoColor=white)](#babysea-oss-taxonomy)
-[![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/oss_status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
+[![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
 [![License](https://custom-icon-badges.demolab.com/badge/license-apache_2.0-059669?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
 
 <br/>
@@ -27,7 +27,6 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 [![Vercel Status](https://img.shields.io/github/deployments/babysea-community/generative-media-starter/production?style=for-the-badge&label=vercel&logo=vercel&logoColor=white&color=000000)](https://generative-media-starter.vercel.app)
 [![GitLabCI](https://img.shields.io/gitlab/pipeline-status/babysea/generative-media-starter?branch=main&style=for-the-badge&label=gitlabci&logo=gitlab&logoColor=white&color=FC6D26)](https://gitlab.com/babysea/generative-media-starter/-/commits/main)
 [![CircleCI](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcircleci.com%2Fapi%2Fv1.1%2Fproject%2Fcircleci%2F2uTLcwc4naeNuKDP41es88%2F6h9hqXrixAorF2MSbqhUN9%2Ftree%2Fmain%3Flimit%3D1&query=%24%5B0%5D.status&style=for-the-badge&logo=circleci&logoColor=white&label=circleci&color=003740)](https://dl.circleci.com/status-badge/redirect/circleci/2uTLcwc4naeNuKDP41es88/6h9hqXrixAorF2MSbqhUN9/tree/main)
-[![Codecov](https://img.shields.io/codecov/c/github/babysea-community/generative-media-starter?style=for-the-badge&label=codecov&logo=codecov&logoColor=white&color=FF0077&token=aNtHG9uJxY)](https://codecov.io/github/babysea-community/generative-media-starter)
 [![Sentry](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/sentry-check.yml?style=for-the-badge&label=sentry&logo=sentry&logoColor=white&color=181225)](https://github.com/babysea-community/generative-media-starter/actions/workflows/sentry-check.yml)
 [![CodeQL](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/codeql.yml?style=for-the-badge&label=codeql&logo=github&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/codeql.yml)
 [![Package](https://img.shields.io/github/actions/workflow/status/babysea-community/generative-media-starter/package-check.yml?style=for-the-badge&label=package&logo=npm&logoColor=white)](https://github.com/babysea-community/generative-media-starter/actions/workflows/package-check.yml)
@@ -38,7 +37,7 @@ Credit-based generative media app with auth, prepaid credits, and private storag
 
 [![Next.js](https://img.shields.io/badge/next_js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/react-53C1DE?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
-[![BabySea](https://custom-icon-badges.demolab.com/badge/babysea-48D1CC?style=for-the-badge&logo=babysea&logoColor=white)](https://babysea.ai)
+[![BabySea](https://custom-icon-badges.demolab.com/badge/babysea-14B8A6?style=for-the-badge&logo=babysea&logoColor=white)](https://babysea.ai)
 [![Stripe](https://img.shields.io/badge/stripe-533AFD?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com)
 [![Supabase](https://img.shields.io/badge/supabase-249361?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 [![Upstash](https://img.shields.io/badge/upstash-00E9A3?style=for-the-badge&logo=upstash&logoColor=white)](https://upstash.com)
@@ -84,9 +83,9 @@ BabySea open source projects are organized into three categories:
 
 BabySea OSS projects are published into three status levels:
 
-[![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/oss_status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
-[![BabySea OSS Status Production](https://custom-icon-badges.demolab.com/badge/oss_status-production-C026D3?style=for-the-badge&logo=babysea&logoColor=white)](#status)
-[![BabySea OSS Status Alpha](https://custom-icon-badges.demolab.com/badge/oss_status-alpha-D97706?style=for-the-badge&logo=babysea&logoColor=white)](#status)
+[![BabySea OSS Status Working](https://custom-icon-badges.demolab.com/badge/status-working-DB2777?style=for-the-badge&logo=babysea&logoColor=white)](#status)
+[![BabySea OSS Status Production](https://custom-icon-badges.demolab.com/badge/status-production-C026D3?style=for-the-badge&logo=babysea&logoColor=white)](#status)
+[![BabySea OSS Status Alpha](https://custom-icon-badges.demolab.com/badge/status-alpha-D97706?style=for-the-badge&logo=babysea&logoColor=white)](#status)
 
 | Status         | Description                                                                                                                                                                          |
 | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -209,16 +208,7 @@ Point Stripe webhooks at `https://your-app.example.com/api/stripe/webhook` and l
 
 ## Security and compliance
 
-Generative Media Starter publishes its trust signals through public GitLab and GitHub checks so contributors can inspect the actual CI configuration, jobs, and reports.
-
-| Signal                      | Coverage                                                                                                                                                          |
-| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GitLab application security | SAST, Advanced SAST, IaC scanning, Dependency Scanning, Secret Detection, Code Quality, guarded Container Scanning, package audit, and redacted Gitleaks.         |
-| Runtime scan                | Scheduled/manual GitLab DAST runs against the public demo target.                                                                                                 |
-| License compliance          | Dependency license inventory is reviewed against [LICENSES.md](LICENSES.md); approval policies are deferred until the GitLab group has enough eligible reviewers. |
-| Repository guards           | GitHub CodeQL, Package Check, Sentry Project Check, CircleCI, and Codecov stay public for cross-provider verification.                                            |
-
-Container scanning is present in CI but only runs when `CS_IMAGE` is configured for a repository that publishes a container image.
+The project publishes its trust signals through public GitHub, GitLab, or other CI provider checks so contributors can inspect the actual CI configuration, jobs, and reports.
 
 ## Community
 
