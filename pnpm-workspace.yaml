@@ -16,7 +16,7 @@ catalog:
   babysea: 2.0.0
   babel-plugin-react-compiler: 1.0.0
   clsx: 2.1.1
-  eslint: 10.0.1
+  eslint: 10.5.0
   eslint-config-next: 16.2.9
   ignore: 7.0.5
   lucide-react: 0.575.0
